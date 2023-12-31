@@ -1,0 +1,1218 @@
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans|Mountains+of+Christmas&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+img[src="logoNrml.png"] {
+    width: 200px;
+    height: fit-content;
+    padding: 5px;
+  }
+.wrapper .multi_color_border{
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right,  #781a1a 0% , #30353b 25%,  #c21313 25%, #262626 50%, #781a1a 50%, #30353b 75%, #c21313 75%, #781a1a 100%);
+}
+
+.wrapper .top_nav{
+  margin-top: 5px;
+  width: 100%;
+  height: 65px;
+  background: #fff;
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrapper .top_nav .right ul li {
+    display: flex;
+    align-items: center; /* Aligner verticalement les éléments à l'intérieur des <li> */
+    margin-right: 15px; /* Espacement entre les éléments <li> */
+  }
+
+.wrapper .top_nav .left{
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+
+.wrapper .top_nav .left .search_bar input[type="text"] {
+    border: 2px solid #aaa6a6;
+    box-shadow: #aaa6a6;
+    height: 30px;
+    width: auto;
+    border-radius: 20px; /* Coins arrondis */
+    padding: 5px 10px 0px;
+    margin-left: 60px;
+    outline: none;
+    transition: all 0.5s linear;
+  }
+  
+  .wrapper .top_nav .left .search_bar input[type="text"]:focus {
+    width: 250px;
+    border-color: #781a1a;
+  }
+  
+  .wrapper .top_nav .left .search_bar input[type="text"]:hover {
+    width: 250px;
+    border-color: #c21313;
+  }
+  
+
+
+.wrapper .top_nav .right ul{
+  display: flex;
+}
+
+.wrapper .top_nav .right ul li{
+  margin: 0 12px;
+}
+
+/*.wrapper .top_nav .right ul li:last-child{
+  background:  #c21313;
+  margin-right: 0;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}*/
+
+#login , #inscrire{
+    background:  #c21313;
+    margin-right: 0;
+    border-radius: 6px;
+    color: #fff;
+    font-size: small;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    align-items: center;
+
+}
+
+  
+.wrapper .top_nav .right ul li img {
+    width: 30px; /* Ajustez la largeur de l'image */
+    height: 30px; /* Ajustez la hauteur de l'image */
+    border-radius: 50%; /* Rendre l'image ronde */
+    object-fit: cover; /* Assurer que l'image remplit l'espace disponible */
+    margin-right: 5px; /* Espacement entre l'image et le texte (si nécessaire) */
+  }
+  
+
+
+
+.wrapper .top_nav .right ul li a{
+  display: block;
+  padding: 8px 10px;
+  color: #666666;
+  font-size: large;
+}
+
+.wrapper .top_nav .right ul li:last-child a{
+   color: #fff;
+}
+
+.wrapper .bottom_nav{
+  width: 100%;
+  background: #f9f9f9;
+  height: 45px;
+  padding: 0 50px;
+}
+
+.wrapper .bottom_nav ul{
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrapper .bottom_nav ul li a{
+  color: #494949;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+  position: relative;
+}
+
+.wrapper .bottom_nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Ajustez la position verticale du trait selon vos besoins */
+    left: 0;
+    width: 100%;
+    height: 2px; /* Hauteur du trait */
+    background-color: #c21313; /* Couleur du trait */
+    transition: width 0.3s ease; /* Animation de transition pour la largeur */
+    transform: scaleX(0); /* Par défaut, la largeur du trait est de 0 */
+    transform-origin: bottom left; /* Point de transformation pour l'animation */
+  }
+
+
+  .wrapper .bottom_nav ul li a:hover::after,
+.wrapper .bottom_nav ul li a:focus::after {
+  transform: scaleX(1); /* Afficher le trait lors du survol ou du focus */
+}
+
+.wrapper .bottom_nav ul li a:hover {
+    color: #c21313; /* Nouvelle couleur lors du survol */
+  }
+
+
+  /* la suite **************************************/
+ 
+
+.gradient_space {
+    height: 600px; /* Hauteur de l'espace coloré */
+    background: linear-gradient(to right, #c21313, #000000); /* Dégradé de couleur */
+    position: relative;
+  }
+  
+
+  .left_image,
+  .right_image {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .left_image {
+    left: 0px; /* Ajuster la position horizontale de l'image de gauche */
+    z-index: 1; /* Place l'image de gauche au-dessus */
+  }
+  
+  .right_image {
+    right: 10px; /* Ajuster la position horizontale de l'image de droite */
+    z-index: 0;
+    width: 700px; /* Place l'image de droite en dessous */
+  }
+  
+  .left_image   {
+    background-color: #c21313;
+    border-top-right-radius: 30%;
+    border-bottom-right-radius:30% ;
+    width: 800px; /* Largeur de l'image */
+    height: 400px; /* Hauteur de l'image */
+   padding-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre portée */
+    
+    
+   
+   
+   
+}
+
+
+
+.read-more {
+    padding: 10px;
+    text-decoration: none;
+    color: #aaa6a6; /* Couleur du texte du lien */
+    font-weight: bold;
+    font-size: 16px; }
+  
+
+
+.left_image .rightnews .desc h1{
+    color: #fff;
+    font-weight: bold;
+    width: fit-content;
+    
+}
+
+.left_image .rightnews .desc p {
+    color: #fff;
+    width: fit-content;
+    height :min-content;
+}
+
+
+
+
+
+  .left_image .leftnews > * {
+    position: relative;
+    
+    
+  }
+  
+  .left_image .rightnews >*  {
+    position: absolute; /* Position absolue pour chaque élément */
+    
+  }
+  .left_image .leftnews,
+.left_image .rightnews {
+  width: 50%; /* Ajustez la largeur selon vos besoins */
+  height: 100%;
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+
+  .left_image .rightnews .desc {
+    text-align: left;
+    padding-left: 30px; /* Ajustez la marge intérieure selon vos besoins */
+  }
+
+  .left_image .vehicle-image {
+    width: 350px; 
+    height: 350px;
+    border-radius: 10px;
+     display: block;
+     position: absolute;
+     
+  }
+
+
+
+
+
+
+/*****************************************************************************/
+
+
+/* Votre CSS existant avec des modifications */
+.slider-wrapper {
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.slides-container {
+  height: calc(100vh - 2rem);
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  scroll-behavior: smooth;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: none;
+  width: 2rem;
+  font-size: 3rem;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 100ms;
+}
+
+#slide-arrow-prev {
+  left: 0;
+  padding-left: 0.25rem;
+  border-radius: 0 2rem 2rem 0;
+}
+
+#slide-arrow-next {
+  right: 0;
+  padding-left: 0.75rem;
+  border-radius: 2rem 0 0 2rem;
+}
+
+.slide {
+  display: flex;
+  align-items: center;
+}
+
+.slide .marque-item {
+  flex: 0 0 auto;
+  padding: 0 70px 10px 70px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide .marque-item img {
+  width: auto;
+  height: 100px;
+  vertical-align: middle;
+}
+
+.slide .marque-name {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.slide .marque-img:hover {
+  transform: scale(1.17);
+  transition: transform 0.3s ease-in-out;
+}
+.section-title {
+  text-align: center;
+  margin-top: 40px; /* Pour un espacement entre le titre et les images */
+}
+
+/**********************************************************************/
+/*le footer */
+/* Footer */
+.footer {
+  background-color: #333; /* Couleur de fond du footer */
+  color: #fff; /* Couleur du texte */
+  padding: 20px 0;
+  
+}
+
+.footer_wrapper {
+  height: 300px;
+  width: 90%; /* Largeur maximale */
+  margin: 0 auto; /* Centrer horizontalement */
+  display: flex;
+  justify-content: space-between; /* Espacement égal entre les sections */
+  align-items: center; /* Alignement vertical */
+  flex-wrap: wrap; /* Passage à la ligne si nécessaire */
+}
+
+.autopairia-section,
+.menu-section,
+.social-media-section {
+  flex: 0 1 30%; /* Occupe 30% de l'espace et peut varier */
+  text-align: center; /* Centrage du contenu */
+  padding: 0 10px; /* Espacement intérieur */
+}
+
+.social-media-section ul {
+  list-style: none;
+  padding: 0;
+  display: flex; /* Utilisation de flexbox */
+  justify-content: space-around; /* Alignement horizontal */
+  align-items: center; /* Alignement vertical */
+}
+
+.autopairia-section h3,
+.menu-section h3,
+.social-media-section h3 {
+  margin-bottom: 10px; /* Espacement sous le titre */
+  color: #fff; /* Couleur du titre */
+}
+
+.autopairia-section ul,
+.menu-section ul,
+.social-media-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.autopairia-section ul li,
+.menu-section ul li,
+.social-media-section ul li {
+  margin-bottom: 5px;
+}
+
+.autopairia-section ul li a,
+.menu-section ul li a,
+.social-media-section ul li a {
+  color: #fff; /* Couleur des liens */
+  text-decoration: none; /* Supprimer la décoration des liens */
+}
+
+.autopairia-section ul li a:hover,
+.menu-section ul li a:hover,
+.social-media-section ul li a:hover {
+  text-decoration: underline; 
+}
+
+
+#logout{
+  color: #000000;
+}
+ #uname{
+  color: #000000;
+}
+.img-profile {
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%; 
+}
+
+
+
+
+
+
+
+
+/* Conteneur principal   du comparateur des vehicles */
+/***********************************************************************/
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  
+}
+
+/* Conteneurs internes pour les formulaires */
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  
+}
+
+/* Style des formulaires individuels */
+.form-box {
+  width: calc(25% - 10px);
+  padding: 20px;
+  border: 1px solid #ccc;
+  
+}
+
+/* Style pour les boutons du formulaire */
+.compare-button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #c21313;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  
+}
+
+/* Style pour les libellés */
+label {
+  display: block;
+  margin-bottom: 5px;
+  
+}
+
+/* Style pour les sélecteurs */
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  
+}
+
+/************************************************************************************************/
+/*********************************************************************************************/
+/* Style du tableau */
+.styled-table {
+  margin-top: 35px;
+  margin-bottom: 45px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead th {
+  /*background-color: #c21313;*/
+  color: #fff;
+  font-weight: bold;
+  text-align: left;
+  padding: 12px;
+}
+
+.styled-table tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #ececec;
+}
+
+
+/***********************************************************************/
+/***********************************************************************************/
+/* Styles pour les comparaisons */
+.comparisons-section {
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.comparisons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.comparison-box {
+  width: 45%; /* Ajustez la largeur en fonction de votre mise en page */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.guide-button {
+  
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.guide-link {
+  padding: 10px 25px;
+  background-color: #c21313;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px; /* Pour obtenir une forme de bouton arrondie */
+  position: relative;
+  overflow: hidden;
+}
+
+.guide-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10px; /* Ajustez la position de la flèche */
+  width: 0;
+  height: 0;
+  border: solid transparent;
+  border-width: 10px;
+  border-left-color: #fff; /* Couleur de la flèche */
+  transform: translateY(-50%);
+}
+
+.guide-link:hover::before {
+  left: 15px; /* Ajustez la position de la flèche au survol */
+}
+
+/* POUR LES CARTES ******************************************************/
+.comparison-box {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.comparison-box h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.comparison-box p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #666;
+}
+.comparisons-section {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
+}
+
+
+
+.comparisons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.comparison-box {
+  width: 45%; /* Ajustez la largeur comme nécessaire */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.comparison-content {
+  margin-bottom: 15px;
+}
+
+.comparison-content h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.comparison-content p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+
+
+/*******************************************************************************/
+/*           pour le contacte */
+
+
+h1 {
+  text-align: center;
+}
+
+.contact-message {
+  width: 70%;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+}
+
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: 120px;
+}
+
+.email,
+.name {
+  width: 48%;
+}
+
+.image-container {
+  width: 30%;
+  text-align: right;
+  margin-right: 20px;
+}
+
+
+
+/*******************************************************************************/
+/* Styles pour le user profile */
+/* Style pour la photo de profil */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.profile-info img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.favorites-container {
+  max-height: 300px; /* Hauteur maximale pour la boîte scrollable */
+  overflow-y: auto; /* Activation du défilement vertical */
+  width: 100%; /* Ajustement de la largeur */
+  padding: 10px;
+}
+
+.vehicle-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.vehicle-container img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.vehicle-container form {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.vehicle-container input[type="text"] {
+  flex: 1;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.vehicle-container button {
+  padding: 5px 10px;
+  background-color: #c21313;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Message de succès */
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+/* Message d'erreur */
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+/****************************************************************************/
+/********  POUR LE GUIDE ACHAT **********************************************/
+.main-content {
+  width: 80%;
+  margin: 20px auto;
+}
+
+
+
+.articlev {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.vehicle-cards {
+  display: flex;
+  overflow-x: auto; /* Activation du défilement horizontal */
+  gap: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.vehicle-card {
+  flex: 0 0 auto; /* Empêche le redimensionnement des cartes */
+  width: 300px; /* Largeur fixe des cartes */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+.header img {
+
+  display: block;
+  margin: 0 auto; 
+}
+
+.vehicle-card:hover {
+  transform: translateY(-5px);
+}
+
+.imagev {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.vehicle-details {
+  padding: 10px 0;
+}
+
+.vehicle-details h3 {
+  margin-bottom: 5px;
+}
+
+.vehicle-details p {
+  margin: 0;
+  color: #666;
+
+}
+
+p {
+  color: #777;
+}
+
+p {
+  color: #777;
+}
+
+.articlev p {
+  line-height: 3.0; 
+}
+
+/* Style de la carte d'avis */
+.avis-container {
+  margin:40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.avis-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  width: 250px;
+}
+
+.avis-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.avis-details p {
+  margin: 5px 0;
+}
+
+/* Style du bouton "Ajouter une étoile" */
+.add-star {
+  background-color: #721c24;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Style de l'icône étoile */
+.star {
+  font-size: 20px;
+  color: gold;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/****************************************/
+/*                       pour lajout d'avis             */
+
+.avis-form {
+  /* Styles pour le formulaire */
+  margin: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.avis-label {
+  /* Styles pour l'étiquette du champ d'avis */
+  display: block;
+  margin: 40px;
+  font-weight: bold;
+}
+
+.avis-input {
+  /* Styles pour le champ d'avis */
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+.avis-submit {
+  /* Styles pour le bouton Ajouter */
+  background-color: #4CAF50;
+  height: 50px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+
+
+.avis-submit:hover {
+  background-color: #45a049;
+}
+
+/*********************************************************************************************/
+/********************** pour les infos de la marque *******************************************/
+/* Style pour la section entière */
+
+
+.brand-details {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  margin-top : 280px;
+  margin-bottom : 180px;
+}
+
+/* Style pour le logo de la marque */
+.brand-logo img {
+  max-width: 100px; /* Ajustez la taille de l'image selon vos besoins */
+  height: auto;
+  margin-right: 20px; /* Marge entre l'image et les informations */
+  border-radius: 5px; /* Coins arrondis */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Ombre légère */
+}
+
+/* Style pour les informations de la marque */
+.brand-info {
+  font-family: Arial, sans-serif;
+  color: #333; /* Couleur du texte */
+}
+
+.brand-info h2 {
+  font-size: 1.5em; /* Taille de la police pour le nom de la marque */
+  margin-bottom: 10px; /* Marge en bas du titre */
+}
+
+.brand-info p {
+  margin: 8px 0;
+}
+
+.brand-info a {
+  color: #007bff; /* Couleur du lien */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.brand-info a:hover {
+  text-decoration: underline; /* Soulignement au survol */
+}
+
+
+/*********************************************/
+/**************** pour la listes des vehicules dune marque */
+.scrollable-container {
+  margin: 80px;
+  max-height: 300px; 
+  height: max-content;
+  overflow-y: auto; 
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.caracteristiques-dropdown {
+  width: 100%; /* Prend la largeur complète de la carte */
+  margin-top: 5px;
+  padding: 5px;
+}
+/***********************************************************************************/
+/***************************** pour le style des cartes des avus dun vehicule **/
+/* Conteneur principal des avis des véhicules */
+.vehicle-veh-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacement entre les avis */
+  max-height: 400px; /* Hauteur maximale du conteneur pour activer le défilement vertical */
+  overflow-y: auto; /* Activer le défilement vertical si nécessaire */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Style d'une carte d'avis de véhicule */
+.avis-veh-card {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.user-veh-info {
+  display: flex;
+  align-items: center; /* Pour aligner verticalement */
+}
+
+.user-veh-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-veh-info p {
+  font-weight: bold;
+}
+
+
+.user-veh-info p {
+  margin-right: 10px; /* Par exemple */
+}
+
+.avis-veh-details {
+  margin-top: 10px;
+}
+
+
+.avis-veh-details p {
+  margin: 5px 0;
+}
+
+/*************************************************************************************************/
+/****************************************************************************************/
+/*****                         pour la pagination  */
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination-link {
+  display: inline-block;
+  
+  margin: 9px;
+  padding: 8px 12px;
+  background-color: #f2f2f2;
+  color: #690c0c;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.pagination-link:hover {
+  background-color: #ddd;
+}
+
+
+/****************************************************************************************/
+/**********************************************************************************************/
+/*********** pour les news /*********************************************/
+
+
+.news-container {
+  max-width: 1200px; 
+  margin: 0 auto; /* Centrer le conteneur */
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Mise en grille pour les news */
+  gap: 20px; /* Espace entre les news */
+}
+
+.news-item {
+  border: 1px solid #ccc; /* Bordure pour le cadre de chaque news */
+  padding: 20px;
+}
+
+.news-item h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.news-item img {
+  width: 500px; 
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.news-item p {
+  margin-bottom: 10px;
+}
+
+.news-item a {
+  display: block;
+  text-align: center;
+  padding: 8px 16px;
+  background-color: #770909;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+/********************************************************************************************/
+/**************************************************pour les details dun new ***************/
+
+/* Styles pour la section de la news */
+.news-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif; /* Police par défaut */
+}
+
+/* Styles pour le titre */
+.news-detail h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  line-height: 1.3; /* Interligne pour le titre */
+  text-align: center;
+}
+
+/* Styles pour l'image */
+.news-detail img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  display: block; /* Centre l'image */
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%; /* Taille de l'image */
+}
+
+/* Styles pour la description */
+.news-detail .news-description {
+  font-size: 18px;
+  line-height: 1.6; /* Interligne pour la description */
+  margin-bottom: 60px;
+  text-align: justify; /* Justifie la description */
+}
+
+/* Style pour la date */
+.news-detail .news-date {
+  font-style: italic;
+  font-size: 14px;
+  color: #888;
+  text-align: right; /* Aligne la date à droite */
+}
+
+/* Styles pour le contenu */
+.news-detail .news-content {
+  line-height: 2.5; /* Interligne plus grand pour le contenu */
+    font-size: 16px;
+  text-align: justify; /* Justifie le contenu */
+}
+
