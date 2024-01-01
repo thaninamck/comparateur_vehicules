@@ -3,7 +3,8 @@
 require_once ('../Models/UserModel.php');
 require_once ('../Views/LoginView.php');
 require_once ('../Views/SignUpView.php');
-
+require_once ('../Views/adminLoginView.php');
+require_once ('../Models/adminModel.php');
 class SignUpController {
 
 
@@ -11,6 +12,7 @@ class SignUpController {
     public function __construct()
     {
         $this->user = new UserModel();
+        $this->admin = new AdminModel();
     }
 
     public function afficherSignUpPage() {
@@ -69,7 +71,36 @@ class SignUpController {
 
 
 
+//pour l'admin 
 
+public function afficherAdminLoginPage() {
+    $AdminloginVue = new AdminLoginView();
+    $AdminloginVue->afficherAdminLoginpage();
+}
 
+public function log_Admin() {
+    if(isset($_POST['email_log']) && isset($_POST['psw_log']) ){
+        if($this->checkAdmin($_POST['email_log'])) {
+            $admin = $this->admin->getAdmin($_POST['email_log'],$_POST['psw_log']);
+            var_dump(" le admin recupere est ",$admin);
+            if($admin){
+                $this->admin->login($_POST['email_log'],$_POST['psw_log']);
+                
+                return 200;
+            }
+            else {
+                  return 201;
+            }
+        }
+        else {
+            return 202;
+        }
+    }
+    return 201;
+}
+
+public function checkAdmin($email) {
+    return $this->admin->checkAdmin($email);
+}
 }?>
 

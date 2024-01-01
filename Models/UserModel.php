@@ -115,7 +115,7 @@ class UserModel {
                                 JOIN marque m ON mo.id_mrq = m.id_mrq 
                                 LEFT JOIN version ve 
                                 ON v.id_vcl = ve.id_vcl 
-                                WHERE f.id_user = ?");
+                                WHERE  f.id_user = ?");
         $stm->execute(array($idUser));
         $favorites = $stm->fetchAll(\PDO::FETCH_ASSOC);
         $this->dbModel->disconnect($pdo);
