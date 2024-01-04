@@ -197,4 +197,35 @@ class GuideAchatModel {
             }
             
             
+            public function getGuideAchatById($id) {
+                $pdo = $this->dbModel->connect();
+                $stm = $pdo->prepare("SELECT * FROM guide_achat WHERE id_gd_ach = :id");
+                $stm->bindParam(':id', $id);
+                $stm->execute();
+                $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+                $this->dbModel->disconnect($pdo);
+                return $results;
+            }
+            
+        
+            public function updateGuideAchat($id, $titre, $contenu, $img) {
+                $pdo = $this->dbModel->connect();
+                $sql = "UPDATE guide_achat SET titre = :titre, contenu = :contenu, img = :img WHERE id_gd_ach = :id";
+                
+                $stmt = $pdo->prepare($sql);
+                
+                $stmt->bindParam(':titre', $titre);
+                $stmt->bindParam(':contenu', $contenu);
+                $stmt->bindParam(':img', $img);
+                $stmt->bindParam(':id', $id);
+                
+                $stmt->execute();
+                
+                $this->dbModel->disconnect($pdo);
+            }
+            
+        
+        
+        
+        
         }

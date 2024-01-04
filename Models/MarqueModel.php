@@ -38,6 +38,121 @@ class Marque {
         return $marque;
     }
 
+
+
+    public function getVehiclesForedit() {
+        
+        $pdo = $this->dbModel->connect();
+        $stm =  $pdo->prepare("SELECT m.*, v.image ,v.annee as aneev,v.id_vcl 
+                            AS vehicule_id, mo.id_mdl 
+                            AS modele_id, mo.nom
+                            AS nom_modele, ve.id_version 
+                            AS version_id, ve.nom AS nom_version 
+                            FROM marque m LEFT JOIN modele mo ON m.id_mrq = mo.id_mrq 
+                            JOIN vehicule v ON mo.id_mdl = v.id_mdl 
+                            LEFT JOIN version ve ON v.id_vcl = ve.id_vcl");
+        $stm->execute();
+        $marque = $stm->fetchAll(\PDO::FETCH_ASSOC);
+        $this->dbModel->disconnect($pdo);
+        return $marque;
+    }
+
+    public function updateMarque($id, $logo, $nom, $pays, $siege_soc, $annee, $web) {
+        try {
+            $pdo = $this->dbModel->connect();
+            
+            $query = "UPDATE marque 
+                      SET logo = :logo, nom = :nom, pays = :pays, siege_soc = :siege_soc, annee = :annee, web = :web 
+                      WHERE id_mrq = :id";
+            
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+            $stmt->bindParam(':logo', $logo, \PDO::PARAM_STR);
+            $stmt->bindParam(':nom', $nom, \PDO::PARAM_STR);
+            $stmt->bindParam(':pays', $pays, \PDO::PARAM_STR);
+            $stmt->bindParam(':siege_soc', $siege_soc, \PDO::PARAM_STR);
+            $stmt->bindParam(':annee', $annee, \PDO::PARAM_STR);
+            $stmt->bindParam(':web', $web, \PDO::PARAM_STR);
+
+            
+            $stmt->execute();
+            
+            $this->dbModel->disconnect($pdo);
+            
+            return true; // Succès de la mise à jour
+        } catch (\PDOException $e) {
+            // Gérer les erreurs éventuelles ici
+            return false; // Échec de la mise à jour
+        }
+    }
+    
+    public function getVehiculeDetailsById($id_vcl) {
+        $pdo = $this->dbModel->connect();
+    
+        $query = "SELECT t.id_type_v as id_type, t.nom as nom_type, v.id_vcl, v.image, v.note, v.annee, 
+                  m.nom AS marque, m.id_mrq as id_marque, mdl.id_mdl as id_modele, mdl.nom AS modele, 
+                  vr.nom AS version, vr.id_version as id_version 
+                  FROM vehicule v 
+                  INNER JOIN modele mdl ON v.id_mdl = mdl.id_mdl 
+                  INNER JOIN marque m ON mdl.id_mrq = m.id_mrq 
+                  JOIN marque_type mt ON mt.id_mrq = m.id_mrq 
+                  JOIN type_vehicule t ON t.id_type_v = mt.id_type_v 
+                  LEFT JOIN version vr ON v.id_vcl = vr.id_vcl 
+                  WHERE v.id_vcl = :id_vcl";
+    
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':id_vcl', $id_vcl, \PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    
+        $this->dbModel->disconnect($pdo);
+    
+        return $result;
+    }
+
+    public function updateVehiculeDetailsById($id_vcl, $newImageValue) {
+        $pdo = $this->dbModel->connect();
+    
+        $query = "UPDATE vehicule v
+                  INNER JOIN modele mdl ON v.id_mdl = mdl.id_mdl
+                  INNER JOIN marque m ON mdl.id_mrq = m.id_mrq
+                  JOIN marque_type mt ON mt.id_mrq = m.id_mrq
+                  JOIN type_vehicule t ON t.id_type_v = mt.id_type_v
+                  LEFT JOIN version vr ON v.id_vcl = vr.id_vcl
+                  SET v.image = :new_image_value
+                  WHERE v.id_vcl = :id_vcl";
+    
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':new_image_value', $newImageValue, \PDO::PARAM_STR);
+        $stmt->bindParam(':id_vcl', $id_vcl, \PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $this->dbModel->disconnect($pdo);
+    }
+    
+    
+    
+
+
+
+    public function getModele() {
+        $pdo = $this->dbModel->connect();
+        $stm = $pdo->query("SELECT * FROM modele");
+        $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+        $this->dbModel->disconnect($pdo);
+        return $results;
+    }
+   
+    public function getversion() {
+        $pdo = $this->dbModel->connect();
+        $stm = $pdo->query("SELECT * FROM version");
+        $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+        $this->dbModel->disconnect($pdo);
+        return $results;
+    }
+
+
     public function getMarqueById1($id) {
         $pdo = $this->dbModel->connect();
         $stm =  $pdo->prepare("SELECT m.*, v.image,v.id_vcl AS vehicule_id, mo.id_mdl AS modele_id, mo.nom AS nom_modele, ve.id_version AS version_id, ve.nom AS nom_version, c.id_caract AS caracteristique_id, c.nom AS nom_caracteristique, c.valeur AS valeur_caracteristique FROM marque m 
@@ -179,6 +294,32 @@ class Marque {
     }
     
  
+    public function insererNouvelleMarque($logo, $nom, $pays, $siege_social, $annee, $web) {
+        $pdo = $this->dbModel->connect();
+        
+        $query = "INSERT INTO marque (logo, nom, pays, siege_soc, annee, web, note) VALUES (:logo, :nom, :pays, :siege_soc, :annee, :web, 0)";
+        
+        $stm = $pdo->prepare($query);
+        
+        $stm->bindParam(':logo', $logo, PDO::PARAM_STR);
+        $stm->bindParam(':nom', $nom, PDO::PARAM_STR);
+        $stm->bindParam(':pays', $pays, PDO::PARAM_STR);
+        $stm->bindParam(':siege_soc', $siege_social, PDO::PARAM_STR);
+        $stm->bindParam(':annee', $annee, PDO::PARAM_STR);
+        $stm->bindParam(':web', $web, PDO::PARAM_STR);
+        
+        $success = $stm->execute();
+        
+        $this->dbModel->disconnect($pdo);
+        
+        return $success;
+    }
+    
+
+
+
+
+
 }
 
 

@@ -289,7 +289,7 @@ class VehicleDescriptionView {
             // Ajout des éléments hiddens pour id_user et id_vcl
             $html .= '<input type="hidden" name="id_user" value="' . $avis['id_user'] . '">';
             $html .= '<input type="hidden" name="id_vcl" value="' . $avis['id_vcl'] . '">';
-            if(isset($_SESSION['user_name']) && isset($_SESSION['user_id'])) {
+            if(isset($_SESSION['user_name']) && isset($_SESSION['user_id'])&&isset($_SESSION['user_status'])&&$_SESSION['user_status']!='bloque'&&$_SESSION['user_status']!='en attente') {
                 $html .= '<button class="add-star" data-id="' . $avis['id_avs_vcl'] . '">Ajouter une étoile</button>';
             }
           

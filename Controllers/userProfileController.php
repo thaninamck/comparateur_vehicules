@@ -16,7 +16,10 @@ class userProfileController
         $this->user = new UserModel();
        
     }
-   
+    public function afficherUserInfo($id, $nom, $prenom, $email, $photo, $sexe){
+        $vue=new  userProfileView();
+        $vue->afficherUserInfo($id, $nom, $prenom, $email, $photo, $sexe);
+    }
     public function afficheruserPage(){
         $vue=new  userProfileView();
         $vue->afficherProfilePage();

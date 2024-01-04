@@ -10,7 +10,7 @@ class NewsView {
         echo '<div class="news-container">';
         //var_dump($news);
         foreach ($news as $singleNews) {
-            var_dump($singleNews);
+            //var_dump($singleNews);
             $id=$singleNews[2];
             $titre = $singleNews[3]; 
             $image = $singleNews[1]; 

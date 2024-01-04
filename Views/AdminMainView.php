@@ -79,7 +79,27 @@ class AdminMainView {
                         </div>
                     </div>';
                     
-                    // Ajoutez d'autres cartes similaires ici en répétant le même modèle
+                    // 3eme carte
+                    echo '
+                    <div class="col-lg-4 mb-4">
+                        <div class="card border-primary">
+                            <a href="http://localhost/projet_web/Routers/Gusers.php"><img src="../Assets/admin/comment.png" class="card-img-top" alt="Image 2"></a>
+                            <div class="card-body">
+                                <h5 class="card-title">Gestion des avis </h5>
+                            </div>
+                        </div>
+                    </div>';
+
+                    // 4eme carte
+                    echo '
+                    <div class="col-lg-4 mb-4">
+                        <div class="card border-primary">
+                            <a href="http://localhost/projet_web/Routers/GguideAchat.php"><img src="../Assets/admin/comment.png" class="card-img-top" alt="Image 2"></a>
+                            <div class="card-body">
+                                <h5 class="card-title">Parametres  </h5>
+                            </div>
+                        </div>
+                    </div>';
                     
                 echo '
                 </div>

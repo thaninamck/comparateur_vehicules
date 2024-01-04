@@ -96,7 +96,7 @@ class UserModel {
                 session_start();
                 $_SESSION['user_id'] = $user['id_user'];
                 $_SESSION['user_name'] = $user['nom'];
-               
+                $_SESSION['user_status'] = $user['status'];
                 $_SESSION['photo'] = $user['photo']; 
                 }
             
@@ -133,4 +133,61 @@ class UserModel {
     
 
 
-}?>
+
+    public function getUsers() {
+        $pdo = $this->dbModel->connect();
+        $stm = $pdo->prepare("SELECT * FROM user");
+        $stm->execute();
+        $users = $stm->fetchAll(\PDO::FETCH_ASSOC);
+        $this->dbModel->disconnect($pdo);
+        return $users;
+    }
+    
+
+    public function updateUserStatusToValid($userId) {
+        
+            $pdo = $this->dbModel->connect();
+            
+            
+            $stmt = $pdo->prepare("UPDATE user SET status = 'valide' WHERE id_user = :userId");
+            $stmt->bindParam(':userId', $userId);
+            
+           
+            $stmt->execute();
+
+            
+            $this->dbModel->disconnect($pdo);}
+
+            
+            public function updateUserStatusToInvalid($userId) {
+        
+                $pdo = $this->dbModel->connect();
+                
+                
+                $stmt = $pdo->prepare("UPDATE user SET status = 'en attente' WHERE id_user = :userId");
+                $stmt->bindParam(':userId', $userId);
+                
+               
+                $stmt->execute();
+    
+                
+                $this->dbModel->disconnect($pdo);}
+
+                public function updateUserStatusToBloqued($userId) {
+        
+                    $pdo = $this->dbModel->connect();
+                    
+                    
+                    $stmt = $pdo->prepare("UPDATE user SET status = 'bloque' WHERE id_user = :userId");
+                    $stmt->bindParam(':userId', $userId);
+                    
+                   
+                    $stmt->execute();
+        
+                    
+                    $this->dbModel->disconnect($pdo);}
+
+
+
+};
+?>
