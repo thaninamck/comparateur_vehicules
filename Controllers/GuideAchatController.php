@@ -89,7 +89,25 @@ class GuideAchatController
     }
 
    
+    public function insererNouveauFavori($id_user, $id_vcl) {
+        $this->guide->insererNouveauFavori($id_user, $id_vcl);
+       
+    }
     
 
+    public function checkIfFavoriteExists($id_user, $id_vcl) {
+        $resultat=$this->guide->checkIfFavoriteExists($id_user, $id_vcl);
+       return $resultat;
+    }
+    
+    
+
+
+    public function   deleteFavorite($id_user, $id_vcl)
+    {
+        $this->guide->    deleteFavorite($id_user, $id_vcl)
+        ;
+       
+    }
     
 }

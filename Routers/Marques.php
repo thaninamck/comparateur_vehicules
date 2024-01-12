@@ -18,22 +18,7 @@ $accueilController->afficherTemmplate('../Js/marques.js');
    
     $MarquesController =new MarquesController();
     
-    
-
-
-   
-    
-
-   
-
-    
         $MarquesController->afficherMarqueDescription();
-       
-        
-        
-
-
-
 
     $accueilController->afficherpieddepage();
 

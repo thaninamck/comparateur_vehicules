@@ -212,37 +212,7 @@ $(document).ready(function() {
    
    
     //*************************************************************************** *******************************************************/
-    $('.update_vcl').on('click', function(e) {
-        e.preventDefault();
-        
-        // Récupérer les données du formulaire
-        const id_vcl = $('#year').val(); 
-        console.log("newsimage",id_vcl)
-        const newImageValue = $('#web').val(); 
-        console.log("newsimage",newImageValue)
-        if (confirm("Êtes-vous sûr de vouloir de modifier ?")) {
-        // Effectuer la demande AJAX
-        $.ajax({
-            type: "POST",
-            url: "../Routers/Gvehicules.php",
-            data: { 
-                id_vcl: id_vcl,
-                newImageValue: newImageValue
-            },
-            success: function(response) {
-                if (response === 'success') {
-                    // La mise à jour a réussi
-                } else {
-                    alert("La mise à jour a réussi !");
-                    window.location.href = "http://localhost/projet_web/Routers/Gvehicules.php"
-                }
-            },
-            error: function() {
-                alert("Erreur lors de la mise à jour");
-            }
-        });
-    }
-    });
+    
 
     //***************************************************************************
      /**********************pour linsertion d'un vehicule  */
@@ -331,4 +301,277 @@ $(document).ready(function() {
         });
     });
 
+
+    /************************************************************************************ */
+/***********************supprimer une Marque  */
+
+
+    $('.delete-marque').on('click', function(e) {
+        e.preventDefault(); // Empêcher le comportement par défaut du lien
+    
+        var idMarque = $(this).data('id'); 
+        console.log("la id est "+idMarque)
+        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer cette marque ? Cela supprimera tous ses véhicules associés!");
+    
+        if (confirmation) {
+            $.ajax({
+                type: 'POST',
+                url: '../Routers/Gvehicules.php', 
+                data: { id_marque: idMarque }, 
+                success: function(response) {
+                    if (response === 'success') {
+                            
+                    } else {
+                        alert("supprimée avec success");
+                        location.reload();
+                    } 
+                },
+                error: function(error) {
+                    console.log(error); 
+                }
+            });
+        } else {
+            console.log('Suppression annulée');
+        }
+    });
+
+
+    $('.delete-vcl').on('click', function(e) {
+        e.preventDefault(); // Empêcher le comportement par défaut du lien
+    
+        var idvcl = $(this).data('id'); 
+        console.log("la id est "+idvcl)
+        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce vehicule ?");
+    
+        if (confirmation) {
+            $.ajax({
+                type: 'POST',
+                url: '../Routers/Gvehicules.php', 
+                data: { id_vcl_sup: idvcl }, 
+                success: function(response) {
+                    if (response === 'success') {
+                            
+                    } else {
+                        alert("supprimé avec success");
+                        location.reload();
+                    } 
+                },
+                error: function(error) {
+                    console.log(error); 
+                }
+            });
+        } else {
+            console.log('Suppression annulée');
+        }
+    });
+
+
+
+
+
+    /****************************************************************************************** */
+    /******************************pour modofer une caratcteriqtuque  ***************************/
+    $(document).on('submit', '#caracteristiqueForm', function(e) {
+        e.preventDefault(); 
+    
+        var nom = $('#nom').val();
+        var valeur = $('#valeur').val();
+        var idCaracteristique = $(this).find('.update-caract').data('caractid');
+    
+        var dataToSend = {
+            nom: nom,
+            valeur: valeur,
+            idCaracteristique: idCaracteristique
+        };
+    
+        $.ajax({
+            type: 'POST',
+            url: '../Routers/Gvehicules.php', 
+            data: dataToSend,
+            success: function(response) {
+                if (response === 'success') {
+                            
+                } else {
+                    alert("mise a jour  avec success");
+                    window.history.go(-1);
+                } 
+            },
+            error: function(error) {
+                console.log('Erreur lors de la mise à jour : ' + error);
+            }
+        });
+    });
+
+
+    //pour supprimer une caratceriqtue 
+    $('.delete-feature').on('click', function(e) {
+        e.preventDefault(); // Empêcher le comportement par défaut du lien
+    
+        var idfeature = $(this).data('id'); 
+        var idvclsup = $(this).data('idvcl'); 
+        console.log("la id est "+idfeature )
+        var confirmation = confirm("Êtes-vous sûr de vouloir supprimer cette caracteriqtue");
+    
+        if (confirmation) {
+            $.ajax({
+                type: 'POST',
+                url: '../Routers/Gvehicules.php', 
+                data: { idfeature: idfeature,
+                        idvclsup:idvclsup }, 
+                success: function(response) {
+                    if (response === 'success') {
+                            
+                    } else {
+                        alert("supprimée avec success");
+                        location.reload();
+                    } 
+                },
+                error: function(error) {
+                    console.log(error); 
+                }
+            });
+        } else {
+            console.log('Suppression annulée');
+        }
+    });
+
+    //pour inserer une caratct
+    $('#insertCaracteristiqueForm').submit(function(e) {
+        e.preventDefault(); 
+
+        // Récupérer les valeurs du formulaire
+        var nom = $('#nom').val();
+        console.log("le nom",nom)
+        var valeur = $('#valeur').val();
+        var idVclCar = $('.insert').data('id');
+        console.log("le nom",idVclCar)
+        // Données à envoyer via AJAX
+        var formData = {
+            nom: nom,
+            valeurcar: valeur,
+            id_vclcar:idVclCar
+        };
+
+        // Requête AJAX
+        $.ajax({
+            type: 'POST',
+            url: '../Routers/Gvehicules.php', 
+            data: formData,
+            success: function(response) {
+                if (response === 'success') {
+                            
+                } else {
+                    window.history.go(-1);
+                } 
+            },
+            error: function(error) {
+                console.log('Erreur lors de l\'insertion : ', error);
+            }
+        });
+    });
+
+    $("#searchInputcar").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("table tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+
+
+
+
+    //pour modifer un vehicule 
+    $(".update-form").on("submit", function(e) {
+        e.preventDefault(); // Empêche l'action par défaut du formulaire
+
+        // Récupérez les valeurs des champs du formulaire
+        var year = $("#year").val();
+        var logo = $("#logo").val();
+        var vclId = $(this).find("button").data("vclid");
+
+        console.log("Année :", year);
+        console.log("Logo :", logo);
+        console.log("ID du véhicule :", vclId);
+        // Construisez l'objet de données à envoyer via Ajax
+        var formData = {
+            year: year,
+            logo: logo,
+            vclId: vclId,
+        };
+
+        $.ajax({
+            type: "POST",
+            url: '../Routers/Gvehicules.php', // L'URL de votre script PHP pour traiter les données
+            data: formData,
+            success: function(response) {
+                if (response === 'success') {
+                            
+                } else {
+                    window.history.go(-1);
+                } 
+            },
+            error: function(error) {
+                console.log(error);
+                // Gérez les erreurs ici
+            }
+        });
+    });
+
+
+
+    $('.addvehicle-form').submit(function(e) {
+        e.preventDefault(); // Empêche l'action par défaut du formulaire
+
+        // Récupération des valeurs du formulaire
+        var selectedModelId = $('#model1').val();
+        var year = $('#year1').val();
+        var logoUrl = $('#logo').val();
+        console.log("le model est "+selectedModelId)
+        // Préparation des données à envoyer
+        var formData = {
+            modelId: selectedModelId,
+            year: year,
+            logoUrl: logoUrl
+        };
+
+        // Envoi des données via AJAX
+        $.ajax({
+            type: 'POST',
+            url: '../Routers/Gvehicules.php', 
+            data: formData,
+            success: function(response) {
+                // Traitez la réponse de la requête si nécessaire
+                console.log('Succès de la requête AJAX : ');
+                window.history.go(-1);
+            },
+            error: function(xhr, status, error) {
+                // Gérez les erreurs de la requête AJAX si nécessaire
+                console.error('Erreur AJAX : ' + error);
+            }
+        });
+    });
+
+
+
+
+    $("#searchInputveh").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("table tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    $("#searchInputmrq").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("table tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    
+
+
+
+
+    
 });

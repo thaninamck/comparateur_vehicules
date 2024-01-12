@@ -2,8 +2,8 @@
 require_once ('../Controllers/GuideAchatController.php');
 require_once ('../Controllers/AcceuilController.php');
 require_once ('../Controllers/MarquesController.php');
-
-
+require_once ('../Controllers/userProfileController.php');
+ob_start(); 
 if(isset($_SESSION['user_name']) && isset($_SESSION['user_id']) ){//si l'utilisateur est authentifié
     $uname=$_SESSION['user_name'];
     $u_id=$_SESSION['user_id'];
@@ -12,7 +12,7 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['user_id']) ){//si l'utilisa
 
 
 
-
+$usercontroller=new userProfileController();
 $accueilController =new AccueilController();
 $accueilController->afficherTemmplate('../Js/vehicleDesc.js');
    
@@ -51,5 +51,12 @@ $accueilController->afficherTemmplate('../Js/vehicleDesc.js');
             echo $html;
         }
         
+    }//pour incrementer une note du vehucule 
+    if (isset($_GET['id_incremnt'])){
+        $id_vcl=$_GET['id_incremnt'];
+        $usercontroller->incrementerNoteVehicule($id_vcl);
+        header("Location: http://localhost/projet_web/Routers/VehicleDescription.php?id=$id_vcl");
+
     }
 
+    ob_end_flush(); 

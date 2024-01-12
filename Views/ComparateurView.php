@@ -27,8 +27,8 @@ class ComparateurView {
         foreach ($results as $vehicleData) {
             foreach ($vehicleData as $vehicle) {
                 echo '<th>';
-                echo '<a href="chemin_vers_votre_page.php?id=' . $vehicle['id_vcl'] . '">';
-                echo '<img id="'.$vehicle['id_vcl']  .'" src="' . $vehicle['image'] . '" alt="Image du véhicule" style="max-width: 100px; max-height: 100px;">';
+                echo '<a href="http://localhost/projet_web/Routers/VehicleDescription.php?id=' . $vehicle['id_vcl'] . '">';
+                echo '<img id="'.$vehicle['id_vcl']  .'" src="' . $vehicle['image'] . '" alt="Image du véhicule" style="width: 300px; height: 400px;">';
                 echo '</a>';
                 ;
                 echo '</th>';

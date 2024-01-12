@@ -53,12 +53,14 @@ class SignUpController {
             if($this->checkUser($_POST['email_log'])) {
                 $user = $this->user->getUser($_POST['email_log'],$_POST['psw_log']);
 
-                if($user){
+                if($user&&$user['status']!='bloque'){
                     $this->user->login($_POST['email_log'],$_POST['psw_log']);
                     
                     return 200;
                 }
-                else {
+                elseif ($user['status']=='bloque') {
+                    return 204;
+                } else {
                       return 201;
                 }
             }

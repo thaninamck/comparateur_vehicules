@@ -98,6 +98,10 @@ class UserModel {
                 $_SESSION['user_name'] = $user['nom'];
                 $_SESSION['user_status'] = $user['status'];
                 $_SESSION['photo'] = $user['photo']; 
+                $_SESSION['sexe'] = $user['sexe']; 
+                $_SESSION['prenom'] = $user['prenom'];
+                $_SESSION['birth_date'] = $user['birth_date'];
+
                 }
             
                 $this->dbModel->disconnect($pdo);
@@ -189,5 +193,96 @@ class UserModel {
 
 
 
+                    public function updateUserProfile($userId, $newName, $newFirstName, $newSexe, $newBirthDate) {
+                        // Connexion à la base de données
+                        $pdo = $this->dbModel->connect();
+                        
+                        // Préparation de la requête SQL pour mettre à jour les informations de l'utilisateur
+                        $stmt = $pdo->prepare("UPDATE user SET nom = :newName, prenom = :newFirstName, sexe = :newSexe, birth_date = :newBirthDate WHERE id_user = :userId");
+                        $stmt->bindParam(':newName', $newName);
+                        $stmt->bindParam(':newFirstName', $newFirstName);
+                        $stmt->bindParam(':newSexe', $newSexe);
+                        $stmt->bindParam(':newBirthDate', $newBirthDate);
+                        $stmt->bindParam(':userId', $userId);
+                        $_SESSION['user_name'] = $newName;
+                $_SESSION['user_status'] = $user['status'];
+                
+                $_SESSION['sexe'] = $newSexe; 
+                $_SESSION['prenom'] = $newFirstName;
+                $_SESSION['birth_date'] = $newBirthDate;
+                        // Exécution de la requête
+                        $stmt->execute();
+                        
+                        // Déconnexion de la base de données
+                        $this->dbModel->disconnect($pdo);
+                    }
+                    
+
+
+
+                    public function incrementerNoteVehicule($idVehicule) {
+                        $pdo = $this->dbModel->connect();
+                    
+                        // Incrémente la note du véhicule de 1
+                        $updateStmt = $pdo->prepare("UPDATE vehicule SET note = note + 1 WHERE id_vcl = ?");
+                        $updateStmt->execute([$idVehicule]);
+                    
+                        $this->dbModel->disconnect($pdo);
+                        return $updateStmt->rowCount() > 0;
+                    }
+                    
+
+                    public function recupererAvisParUtilisateurEtVehicule($idUser) {
+                        $pdo = $this->dbModel->connect();
+                    
+                        // Récupère les avis de la table avis_vehicule pour un utilisateur et un véhicule donnés
+                        $selectStmt = $pdo->prepare("SELECT * FROM avis_vehicule WHERE id_user = ?  ");
+                        $selectStmt->execute([$idUser]);
+                        $avis = $selectStmt->fetchAll(PDO::FETCH_ASSOC);
+                    
+                        $this->dbModel->disconnect($pdo);
+                        return $avis;
+                    }
+                    
+
+                    public function deleteAvis($id_vcl) {
+                        $pdo = $this->dbModel->connect();
+                                
+                                    $query = "DELETE FROM avis_vehicule WHERE id_avs_vcl = :id_vcl";
+
+                                    $stm = $pdo->prepare($query);
+                                
+                                    $stm->bindParam(':id_vcl', $id_vcl, PDO::PARAM_INT);
+                                    $stm->execute();
+                                
+                                    $this->dbModel->disconnect($pdo);
+                    }
+                    
+                    public function recupererAvisParId($idAvis) {
+                        $pdo = $this->dbModel->connect();
+                    
+                        $selectStmt = $pdo->prepare("SELECT * FROM avis_vehicule WHERE id_avs_vcl = ?");
+                        $selectStmt->execute([$idAvis]);
+                        $avis = $selectStmt->fetch(PDO::FETCH_ASSOC);
+                    
+                        $this->dbModel->disconnect($pdo);
+                        return $avis;
+                    }
+
+                    public function mettreAjourCommentaire($id_avs_vcl, $nouveauCntxt) {
+                        $pdo = $this->dbModel->connect();
+                    
+                       
+                            $stmt = $pdo->prepare("UPDATE avis_vehicule SET cntxt = :nouveauCntxt WHERE id_avs_vcl = :id_avs_vcl");
+                            $stmt->bindParam(':nouveauCntxt', $nouveauCntxt, PDO::PARAM_STR);
+                            $stmt->bindParam(':id_avs_vcl', $id_avs_vcl, PDO::PARAM_INT);
+                            $stmt->execute();
+                    
+                            
+                            $this->dbModel->disconnect($pdo);
+                        
+                    }
+                    
+                    
 };
 ?>

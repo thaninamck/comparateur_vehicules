@@ -17,6 +17,7 @@ class Marque {
     }
 
 
+    
     public function getMarqueByType($idtype) {
         
         $pdo = $this->dbModel->connect();
@@ -38,24 +39,39 @@ class Marque {
         return $marque;
     }
 
-
-
-    public function getVehiclesForedit() {
-        
+    public function DeleteMarque($id) {
         $pdo = $this->dbModel->connect();
-        $stm =  $pdo->prepare("SELECT m.*, v.image ,v.annee as aneev,v.id_vcl 
-                            AS vehicule_id, mo.id_mdl 
-                            AS modele_id, mo.nom
-                            AS nom_modele, ve.id_version 
-                            AS version_id, ve.nom AS nom_version 
-                            FROM marque m LEFT JOIN modele mo ON m.id_mrq = mo.id_mrq 
+        $stm = $pdo->prepare("DELETE FROM marque WHERE id_mrq = ?");
+        $stm->execute(array($id));
+        $this->dbModel->disconnect($pdo);
+    }
+
+    public function DeleteVehicule($id) {
+        $pdo = $this->dbModel->connect();
+        $stm = $pdo->prepare("DELETE FROM vehicule WHERE id_vcl = ?");
+        $stm->execute(array($id));
+        $this->dbModel->disconnect($pdo);
+    }
+    
+
+   
+
+    public function getVehiclesOfMarque($marque_id) {
+        $pdo = $this->dbModel->connect();
+        $stm =  $pdo->prepare("SELECT m.id_mrq, v.image, v.annee AS aneev, v.id_vcl AS vehicule_id, 
+                            mo.id_mdl AS modele_id, mo.nom AS nom_modele, 
+                            ve.id_version AS version_id, ve.nom AS nom_version 
+                            FROM marque m 
+                            LEFT JOIN modele mo ON m.id_mrq = mo.id_mrq 
                             JOIN vehicule v ON mo.id_mdl = v.id_mdl 
-                            LEFT JOIN version ve ON v.id_vcl = ve.id_vcl");
-        $stm->execute();
+                            LEFT JOIN version ve ON v.id_vcl = ve.id_vcl 
+                            WHERE m.id_mrq = ?");
+        $stm->execute([$marque_id]);
         $marque = $stm->fetchAll(\PDO::FETCH_ASSOC);
         $this->dbModel->disconnect($pdo);
         return $marque;
     }
+    
 
     public function updateMarque($id, $logo, $nom, $pays, $siege_soc, $annee, $web) {
         try {
@@ -315,6 +331,164 @@ class Marque {
         return $success;
     }
     
+
+    public function getMarquesAdmin() {
+        $pdo = $this->dbModel->connect();
+        $stm = $pdo->query("SELECT * FROM marque");
+        $results = $stm->fetchAll(\PDO::FETCH_ASSOC);
+        $this->dbModel->disconnect($pdo);
+        return $results;
+    }
+
+
+
+    public function getCaracteristiquesVehicule($idVehicule) {
+        $pdo = $this->dbModel->connect();
+    
+        $stm = $pdo->prepare("SELECT c.*, v.id_vcl 
+                              FROM vehicule v 
+                              JOIN vehicule_caracteristiques vc ON v.id_vcl = vc.id_vcl 
+                              LEFT JOIN caracteristiques c ON vc.id_caract = c.id_caract 
+                              WHERE v.id_vcl = :id");
+    
+        $stm->bindParam(':id', $idVehicule, \PDO::PARAM_INT);
+        $stm->execute();
+    
+        $caracteristiques = $stm->fetchAll(\PDO::FETCH_ASSOC);
+    
+        $this->dbModel->disconnect($pdo);
+    
+        return $caracteristiques;
+    }
+
+    
+
+    public function updateCaracteristique($idCaracteristique, $nouveauNom, $nouvelleValeur) {
+       
+            $pdo = $this->dbModel->connect();
+
+            $query = "UPDATE caracteristiques SET nom = :nouveauNom, valeur = :nouvelleValeur WHERE id_caract = :id";
+
+            $stm = $pdo->prepare($query);
+
+            $stm->bindParam(':id', $idCaracteristique, \PDO::PARAM_INT);
+            $stm->bindParam(':nouveauNom', $nouveauNom, \PDO::PARAM_STR);
+            $stm->bindParam(':nouvelleValeur', $nouvelleValeur, \PDO::PARAM_STR);
+
+           
+            $stm->execute();
+
+            $this->dbModel->disconnect($pdo);
+
+           
+        }
+
+
+
+
+        public function insererCaracteristique($nom, $valeur, $idVehicule) {
+      
+            $pdo = $this->dbModel->connect();
+  
+            $query = "INSERT INTO caracteristiques (nom, valeur) VALUES (:nom, :valeur)";
+            $stm = $pdo->prepare($query);
+  
+            $stm->bindParam(':nom', $nom, \PDO::PARAM_STR);
+            $stm->bindParam(':valeur', $valeur, \PDO::PARAM_STR);
+  
+            $stm->execute();
+  
+            $idNouvelleCaracteristique = $pdo->lastInsertId();
+  
+            $queryRelation = "INSERT INTO vehicule_caracteristiques (id_caract, id_vcl) VALUES (:idCaracteristique, :idVehicule)";
+            $stmRelation = $pdo->prepare($queryRelation);
+  
+            $stmRelation->bindParam(':idCaracteristique', $idNouvelleCaracteristique, \PDO::PARAM_INT);
+            $stmRelation->bindParam(':idVehicule', $idVehicule, \PDO::PARAM_INT);
+  
+            $stmRelation->execute();
+  
+            $this->dbModel->disconnect($pdo);
+  
+            
+        }
+
+
+
+        
+        public function supprimerCaracteristique($idVehicule, $idCaracteristique) {
+         
+                $pdo = $this->dbModel->connect();
+    
+                // Supprimer l'association dans la table de liaison (vehicule_caracteristiques)
+                $query = "DELETE FROM vehicule_caracteristiques WHERE id_vcl = :idVcl AND id_caract = :idCaract";
+                $stm = $pdo->prepare($query);
+                $stm->bindParam(':idVcl', $idVehicule, \PDO::PARAM_INT);
+                $stm->bindParam(':idCaract', $idCaracteristique, \PDO::PARAM_INT);
+                $stm->execute();
+    
+                // Fermeture de la connexion
+                $this->dbModel->disconnect($pdo);}
+
+            public function getfeatureById($idCaracteristique) {
+              
+                    $pdo = $this->dbModel->connect();
+        
+                    $query = "SELECT * FROM caracteristiques WHERE id_caract = :id";
+                    $stm = $pdo->prepare($query);
+        
+                    $stm->bindParam(':id', $idCaracteristique, \PDO::PARAM_INT);
+        
+                    $stm->execute();
+        
+                    $caracteristique = $stm->fetch(\PDO::FETCH_ASSOC);
+        
+                    $this->dbModel->disconnect($pdo);
+                     return $caracteristique;
+                }
+        
+
+
+
+                public function updateVehiculeAndVersion($idVehicule, $image,   $annee) {
+                    $pdo = $this->dbModel->connect();
+                
+                    // Mise à jour du véhicule
+                    $vehiculeQuery = "UPDATE vehicule SET image = :image,   annee = :annee WHERE id_vcl = :idVehicule ";
+                    $vehiculeStmt = $pdo->prepare($vehiculeQuery);
+                    $vehiculeStmt->bindParam(':idVehicule', $idVehicule, \PDO::PARAM_INT);
+                    $vehiculeStmt->bindParam(':image', $image, \PDO::PARAM_STR);
+                    $vehiculeStmt->bindParam(':annee', $annee, \PDO::PARAM_STR);
+                    $vehiculeStmt->execute();
+                
+                    
+                
+                    $this->dbModel->disconnect($pdo);
+                }
+                
+               public function insertNewVehicule($image, $annee, $id_mdl) {
+                    $pdo = $this->dbModel->connect();
+                
+                    // Insertion d'un nouveau véhicule
+                    $vehiculeQuery = "INSERT INTO vehicule (image, note,annee, id_mdl) VALUES (:image, 0,:annee, :id_mdl)";
+                    $vehiculeStmt = $pdo->prepare($vehiculeQuery);
+                    $vehiculeStmt->bindParam(':image', $image, \PDO::PARAM_STR);
+                    $vehiculeStmt->bindParam(':annee', $annee, \PDO::PARAM_STR);
+                    $vehiculeStmt->bindParam(':id_mdl', $id_mdl, \PDO::PARAM_INT);
+                    $vehiculeStmt->execute();
+                
+                    // Récupération de l'ID du nouveau véhicule inséré
+                    $newVehiculeId = $pdo->lastInsertId();
+                
+                    $this->dbModel->disconnect($pdo);
+                
+                    return $newVehiculeId;
+                }
+                
+                
+
+
+
 
 
 

@@ -1,10 +1,14 @@
 <?php
 require_once ('../Controllers/AdminController.php');
 require_once ('../Controllers/NewsController.php');
-
-$newscontroller=new NewsController();
+if(isset($_SESSION['id_admin'])  ){//si l'utilisateur est authentifié
+    $newscontroller=new NewsController();
 $controller =new AdminController();
 $controller->afficherTemplate("../Js/news.js");
+}else{
+    header("Location: http://localhost/projet_web/Routers/Admin.php");
+}
+
 
 
 if (isset($_GET['id'])) {

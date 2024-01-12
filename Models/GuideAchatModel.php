@@ -226,6 +226,59 @@ class GuideAchatModel {
             
         
         
+
+
+            public function insererNouveauFavori($id_user, $id_vcl) {
+                $pdo = $this->dbModel->connect();
+                
+                $sql = "INSERT INTO favoris (id_user, id_vcl) VALUES (:id_user, :id_vcl)";
+                
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':id_user', $id_user);
+                $stmt->bindParam(':id_vcl', $id_vcl);
+                
+                $stmt->execute();
+                
+                $this->dbModel->disconnect($pdo);
+            }
+
+            public function checkIfFavoriteExists($id_user, $id_vcl) {
+                $pdo = $this->dbModel->connect();
+                
+                $sql = "SELECT COUNT(*) as count FROM favoris WHERE id_user = :id_user AND id_vcl = :id_vcl";
+                
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':id_user', $id_user);
+                $stmt->bindParam(':id_vcl', $id_vcl);
+                
+                $stmt->execute();
+                
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $this->dbModel->disconnect($pdo);
+                
+                return ($result['count'] > 0) ? 1 : 0;
+            }
+            
+
+            
+            
+            public function deleteFavorite($id_user, $id_vcl) {
+                $pdo = $this->dbModel->connect();
+                
+                
+                    $sql = "DELETE FROM favoris WHERE id_user = :id_user AND id_vcl = :id_vcl";
+                    
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':id_user', $id_user);
+                    $stmt->bindParam(':id_vcl', $id_vcl);
+                    
+                    $stmt->execute();
+                
+                
+                $this->dbModel->disconnect($pdo);
+            }
+            
         
         
         }

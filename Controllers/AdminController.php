@@ -98,18 +98,124 @@ class AdminController
         $avis= $this->avis->invaliderAvis($id_vcl);
          
      }
-     //pour la gestion des vehicules 
-     public function getVehiclesForedit(){
 
-        $avis= $this->marques->getVehiclesForedit();
+     /***************************************************************************************** */
+     //pour la gestion des vehicules + marques 
+     public function getVehiclesOfMarque($marque_id){
+
+        $avis= $this->marques->getVehiclesOfMarque($marque_id);
          return $avis;
      }
      
+     public function afficherVehiculesMarques($marque_id){
+      $vue=new VehiculesView();
+      $donneesVehicules= $this->getVehiclesOfMarque($marque_id);
+      $vue->afficherVehiculesMarques($donneesVehicules);
+     
+       
+   }
+   //supprimer une marque 
+   public function DeleteMarque($id_marque){
 
-     public function afficherVehicules(){
+     $this->marques->DeleteMarque($id_marque);
+       
+   }
+   
+   public function DeleteVehicule($id){
+
+      $this->marques->DeleteVehicule($id);
+        
+    }
+   
+
+    //charger les caratcteriqtiUES dun vehicule 
+    
+    public function getCaracteristiquesVehicule($idVehicule){
+
+      $marques= $this->marques->getCaracteristiquesVehicule($idVehicule);
+       return $marques;
+   }
+      
+   
+   //charger les marques pour admin
+     public function getMarquesAdmin(){
+
+      $marques= $this->marques->getMarquesAdmin();
+       return $marques;
+   }
+
+      //gestion des caratcteriqtues d'un vehicule ********************************************************
+
+   public function afficherFeatures($id){
+      $vue=new VehiculesView();
+      $donneesVehicules= $this->getCaracteristiquesVehicule($id);
+      $vue->afficherFeatures($donneesVehicules);
+     
+       
+   }
+
+   
+   public function supprimerCaracteristique($idVehicule, $idCaracteristique){
+
+      $this->marques->supprimerCaracteristique($idVehicule, $idCaracteristique);
+      
+   }
+
+   
+   public function updateCaracteristique($idCaracteristique, $nouveauNom, $nouvelleValeur){
+
+      $this->marques->updateCaracteristique($idCaracteristique, $nouveauNom, $nouvelleValeur);
+      
+   }
+   
+   public function  insererCaracteristique($nom, $valeur, $idVehicule)
+   {
+
+      $this->marques->   insererCaracteristique($nom, $valeur, $idVehicule)
+      ;
+      
+   }
+  
+   public function getfeatureById($idCaracteristique)
+   {
+
+      $car=$this->marques->   getfeatureById($idCaracteristique);
+      return $car
+      ;
+      
+   }
+
+   public function showEditCaracteristique($idCaracteristique){
+      $vue=new VehiculesView();
+      $donneesVehicules= $this->getfeatureById($idCaracteristique);
+      $vue->showEditCaracteristique($donneesVehicules);
+     
+       
+   }
+   public function showinserercaract($id_vcl_car){
+      $vue=new VehiculesView();
+      $vue->showInsertCaracteristiqueForm($id_vcl_car);
+     
+       
+   }
+
+   public function    updateVehiculeAndVersion($idVehicule, $image, $annee)
+
+   {
+
+      $this->marques-> updateVehiculeAndVersion($idVehicule, $image, $annee)
+      ;
+      
+      
+   }
+   
+
+
+/************************************************************************************************ */
+     public function afficherMarques(){
         $vue=new VehiculesView();
-        $donneesVehicules= $this->getVehiclesForedit();
-        $vue->afficherVehicules($donneesVehicules);
+        $donneesVehicules= $this->getMarquesAdmin();
+        $vue->afficherMarques($donneesVehicules);
        
          
      }
@@ -131,6 +237,7 @@ class AdminController
        
          
      }
+     
 
      public function getMarqueById($id){
 
@@ -176,12 +283,14 @@ class AdminController
          
      }
 
-     public function insertVcl(){
+     public function insertVcl($id){
 
         $vue=new VehiculesView();
        
-        $vue->insertVcl();
+        $vue->insertVcl($id);
      }
+
+
      public function  showBrandForm(){
 
         $vue=new VehiculesView();
@@ -195,8 +304,15 @@ class AdminController
         $this->marques->insererNouvelleMarque($logo, $nom, $pays, $siege_social, $annee, $web);
         
     }
-     
 
+    public function  insertNewVehicule($image, $annee, $id_mdl){
+
+      $this->marques->insertNewVehicule($image, $annee, $id_mdl);
+      
+      }
+    
+     
+    /*********************************************************************************************************** */
     /**************************pour la gestion des utilisateurs  *********************/
     
     public function  afficherUsers(){

@@ -2,10 +2,14 @@
 <?php
 require_once ('../Controllers/NewsController.php');
 require_once ('../Controllers/AdminController.php');
-
-
-$controller = new AdminController();
+if(isset($_SESSION['id_admin'])  ){//si l'utilisateur est authentifié
+    $controller = new AdminController();
 $controller->afficherTemplate("../Js/gdAch.js");
+}else{
+    header("Location: http://localhost/projet_web/Routers/Admin.php");
+}
+
+
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -29,7 +33,7 @@ elseif ($_SERVER["REQUEST_METHOD"] == "POST"&&isset($_POST['email']) ) {
 
 elseif ($_SERVER["REQUEST_METHOD"] == "POST"&&isset($_POST['img']) ) {
     $titre = $_POST['titre'];
-    var_dump("je suis das hhhh");
+    //var_dump("je suis das hhhh");
     $contenu = $_POST['contenu'];
     $img = $_POST['img'];
     $idGuide = $_POST['idGuide'];

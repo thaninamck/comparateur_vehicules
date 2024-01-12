@@ -1,5 +1,6 @@
 <?php
 
+require_once ('../Controllers/GuideAchatController.php');
 
 require_once ('../Controllers/ComparateurController.php');
 
@@ -9,18 +10,26 @@ class VehicleDescriptionView {
 
     function afficherVehicleDescription($results) {
         //var_dump("le resultat de var_dump est :", $results);
-    
+        
         if (isset($results)) {
+          
             echo '<table class="styled-table">';
             echo '<thead>';
             echo '<tr>';
-            echo '<th>   </th>';
+            echo '<th> ';
+            
+             echo'</th>';
     
             
             foreach ($results as $vehicleId => $vehicleData) {
+                
+                
+                
+                
+                echo '</div>';
                 echo '<th>';
                 echo '<a href="chemin_vers_votre_page.php?id=' . $vehicleData['id_vcl'] . '">';
-                echo '<img id="' . $vehicleData['id_vcl'] . '" src="' . $vehicleData['image'] . '" alt="Image du véhicule" style="max-width: 100px; max-height: 100px;">';
+                echo '<img id="' . $vehicleData['id_vcl'] . '" src="' . $vehicleData['image'] . '" alt="Image du véhicule" style="max-width: 400px; max-height: 450px;">';
                 echo '</a>';
                 echo '</th>';
             }
@@ -79,6 +88,7 @@ class VehicleDescriptionView {
     
             echo '</tbody>';
             echo '</table>';
+            
         } else {
             if ($results == null) {
                 echo '  ';
@@ -87,8 +97,8 @@ class VehicleDescriptionView {
 
 
         echo '
-  <div class="container">
-      <h1 id="izan">Comparateur de véhicules</h1>
+  <div class="comparateur-container" style="margin-top: 70px; margin-bottom: 80px;">
+      <h1 >Comparer ce véhicule !</h1>
       
       
       <label for="vehicleType">Choisissez le type de véhicule :</label>
@@ -103,7 +113,7 @@ class VehicleDescriptionView {
       echo '</select>
           
       
-      <div class="form-container">
+      <div class="form-comparateur-container">
           
 
 
@@ -263,7 +273,7 @@ class VehicleDescriptionView {
          
       </div>
           
-      <!-- Bouton Comparer -->
+    
       <input type="submit" value="Comparer" id="compareButton" class="compare-button">
 
 
@@ -274,7 +284,9 @@ class VehicleDescriptionView {
     
     
     public function afficherAvis($results){
-        $html = '<div class="avis-container">';
+        $html=' <h2 style="margin-top: 70px; margin-bottom: 70px;text-align: center;">Meilleurs Commentaires </h2>';
+
+        $html .= '<div class="avis-container">';
         //var_dump("le resultat de var_dump est :", $results);
         foreach($results as $avis) {
             $html .= '<div class="avis-card">';
@@ -291,6 +303,7 @@ class VehicleDescriptionView {
             $html .= '<input type="hidden" name="id_vcl" value="' . $avis['id_vcl'] . '">';
             if(isset($_SESSION['user_name']) && isset($_SESSION['user_id'])&&isset($_SESSION['user_status'])&&$_SESSION['user_status']!='bloque'&&$_SESSION['user_status']!='en attente') {
                 $html .= '<button class="add-star" data-id="' . $avis['id_avs_vcl'] . '">Ajouter une étoile</button>';
+                
             }
           
             $html .= '</div>';
@@ -307,12 +320,18 @@ class VehicleDescriptionView {
         foreach ($results as $vehicleId => $vehicleData) {
         echo '
         
-        <label for="avis" class="avis-label">Ajouter un avis pour ce vehicule ! </label>
-        <form id="form_avis" class="avis-form">
+        <label for="avis" class="avis-label" style="margin-top: 20px; margin-bottom: 10px;">Ajouter un avis pour ce vehicule ! </label>
+        <form id="form_avis" class="avis-form" style=" margin-bottom: 100px;">
             
             <input type="text" id="'. $vehicleData['id_vcl'].'" name="avis" class="avis-input" placeholder="Votre avis...">
-            <input type="submit" value="Ajouter" class="avis-submit">
-        </form>';}
+            <input type="submit" value="Ajouter" class="avis-submit">';
+            if(isset($_SESSION['user_name']) && isset($_SESSION['user_id'])&&isset($_SESSION['user_status'])&&$_SESSION['user_status']!='bloque'&&$_SESSION['user_status']!='en attente') {
+                echo' <a href="http://localhost/projet_web/Routers/VehicleDescription.php?id_incremnt=' . $vehicleData['id_vcl'] . '" class="btn btn-danger" style="margin:5px">Ajouter une etoile ★</a>
+                ';
+                
+            }
+       echo' </form>';
+        }
     }
     
     
@@ -320,7 +339,7 @@ class VehicleDescriptionView {
     public function afficherComparaisonsDeVehicule($comparaisons) {
         //var_dump("le resultat de var_dump est :", $comparaisons);
         echo '<div class="comparisons-section">
-                <h2>Comparaisons les plus effectuées pour ce vehicule </h2>
+                <h2 style="margin-top: 30px; margin-bottom: 70px;text-align: center;">Comparaisons les plus effectuées pour ce vehicule </h2>
                 <div class="comparisons-container">';
     
         if ($comparaisons && is_array($comparaisons)) {
@@ -330,6 +349,7 @@ class VehicleDescriptionView {
                             <h3>' . $comparaison['marque_1'] . ' - ' . $comparaison['modele_1'] . '</h3>
                             <p>' . $comparaison['version_1'] . '</p>
                         </div>
+                        <h2>vs</h2>
                         <div class="comparison-content">
                             <h3>' . $comparaison['marque_2'] . ' - ' . $comparaison['modele_2'] . '</h3>
                             <p>' . $comparaison['version_2'] . '</p>

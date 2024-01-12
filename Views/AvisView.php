@@ -5,16 +5,18 @@ require_once ('../Controllers/AvisController.php');
 
 class AvisView {
 
-    public function afficherVehicule($modele, $version, $image) {
-        echo '<div class="card">
-                <img src="' . htmlentities($image) . '" alt="Image du véhicule">
+    public function afficherVehicule($modele, $version, $image,$id_vcl) {
+        echo '<div style="margin-left:70px;margin-bottom:40px " class="desccard">
+        <a href="http://localhost/projet_web/Routers/VehicleDescription.php?id=' . $id_vcl . '" >
+           <img  style="height:300px;width:300px" src="' . htmlentities($image) . '" alt="Image du véhicule"></a>
                 <h3>Modèle: ' . htmlentities($modele) . '</h3>
                 <p>Version: ' . htmlentities($version) . '</p>
               </div>';
     }
     
     public function afficherAvisVehicules($id_vcl,$modele, $version, $image,$results, $totalAvis) {
-        $html = '<div class="vehicle-veh-container">';
+        $html =  '<h3 style="margin:40px">Avis de ce vehicule </h3>';
+        $html = '<div style="margin:40px" class="vehicle-veh-container">';
         
         // Affichage des avis
         foreach ($results as $avis) {
@@ -41,11 +43,18 @@ class AvisView {
         // Ajout de la pagination
         $perPage = 5; // Nombre d'avis par page
         $totalPages = ceil($totalAvis / $perPage); // Calcul du nombre total de pages
-        $html .= '<div class="pagination">';
+        $html .= '<div class="text-center">';
+        $html .=     '<nav aria-label="Page navigation" class="d-inline-block mx-auto">';
+        $html .=         '<ul class="pagination">';
         for ($i = 1; $i <= $totalPages; $i++) {
-            $html .= '<a href="?page=' . $i . '&id=' . $id_vcl . '&modele=' . urlencode($modele) . '&version=' . urlencode($version) . '&image=' . urlencode($image) . '">Page :' . $i . '</a>';
+            $html .=             '<li class="page-item">';
+            $html .=                 '<a class="page-link" href="?page=' . $i . '&id=' . $id_vcl . '&modele=' . urlencode($modele) . '&version=' . urlencode($version) . '&image=' . urlencode($image) . '">' . $i . '</a>';
+            $html .=             '</li>';
         }
+        $html .=         '</ul>';
+        $html .=     '</nav>';
         $html .= '</div>';
+        
         
         echo $html; // Affichage de la structure HTML complète
     }

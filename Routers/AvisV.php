@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $version = $_GET['version'];
         $image = $_GET['image'];
 
-        $AvisController->afficherVehicule($id_vcl, $modele, $version, $image);
+        $AvisController->afficherVehicule( $modele, $version, $image,$id_vcl);
         $AvisController->afficherAvisVehicules($modele, $version, $image,$id_vcl);
     } else {
         // Gérer le cas où les paramètres ne sont pas tous présents

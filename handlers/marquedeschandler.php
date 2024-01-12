@@ -1,7 +1,13 @@
 <?php
 // Dans Marques.php (extrait)
 require_once('../Controllers/MarquesController.php');
+require_once('../Controllers/MarquesController.php');
 
+// Intégration de Bootstrap
+echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">';
+echo '<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>';
+echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>';
+echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['marque_id'])) {
         $id_mrq = $_POST['marque_id'];
@@ -12,6 +18,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     //var_dump($marques);
                     
                     $html = '<div id="marqv">';
+                    
+                    
+                    
+                    
+
+                    foreach ($marques['vehicules'] as $vehicule) {
+                        $modeles = $vehicule['modeles'];
+                        foreach ($modeles as $modele) {
+                            $versions = $modele['versions'];
+                            foreach ($versions as $version) {
+                                echo'<a href="http://localhost/projet_web/Routers/VehicleDescription.php?id=' . $vehicule['id_vcl'] . '" >';
+                                echo '<div class="card">';
+                                echo'<img src="' . $vehicule['image'] . '" alt="Photo de profil">';
+                                echo '<h3>Modèle: ' . $modele['nom_modele'] . '</h3>';
+                                echo '<p>Version: ' . $version['nom_version'] . '</p>';
+                                
+                                echo '</a>';
+                                echo '<select class="caracteristiques-dropdown">';
+                                foreach ($version['caracteristiques'] as $caracteristique) {
+                                    echo '<option value="' . $caracteristique['id_caract'] . '">'
+                                        . $caracteristique['nom_caracteristique'] . ': '
+                                        . $caracteristique['valeur_caracteristique'] . '</option>';
+                                }
+                                echo '</select>';
+                                echo '</div>';
+                                
+                                
+                            }
+                        }
+                    }
+                    $html .= '</div>';
+
                     $marqueDetails = $marques['informations_marque'];
                     $html .= '<div class="brand-details" id="brandDetails">
                                 <div class="brand-logo">
@@ -27,41 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                             </div>';
 
-                    $html .= '</div>';
-                    
-                    
-                    
-                            $html .= '<div class="scrollable-container">';
-
-                    foreach ($marques['vehicules'] as $vehicule) {
-                        $modeles = $vehicule['modeles'];
-                        foreach ($modeles as $modele) {
-                            $versions = $modele['versions'];
-                            foreach ($versions as $version) {
-                                echo'<a href="http://localhost/projet_web/Routers/VehicleDescription.php?id=' . $vehicule['id_vcl'] . '" >';
-                                echo '<div class="card">';
-                                echo '<h3>Modèle: ' . $modele['nom_modele'] . '</h3>';
-                                echo '<p>Version: ' . $version['nom_version'] . '</p>';
-                                echo'<img src="' . $vehicule['image'] . '" alt="Photo de profil">';
-                                echo '<select class="caracteristiques-dropdown">';
-                                foreach ($version['caracteristiques'] as $caracteristique) {
-                                    echo '<option value="' . $caracteristique['id_caract'] . '">'
-                                        . $caracteristique['nom_caracteristique'] . ': '
-                                        . $caracteristique['valeur_caracteristique'] . '</option>';
-                                }
-                                echo '</select>';
-                                echo '</div>';
-                                echo '</a>';
-                                
-                            }
-                        }
-                    }
-
-
                     
                     $results = $MarquesController->getHighRatedAv( $id_mrq);
 
-                    $html = '<div class="avis-container">';
+                    $html .= '<div class="avis-container">';
                     //var_dump("le resultat de var_dump est :", $results);
                     foreach($results as $avis) {
                         $html .= '<div class="avis-card">';
@@ -83,13 +90,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $html .= '</div>';
                         $html .= '</div>';
                     }
-
-                    $html .= '</div>';
-
-                    $html .= '<a href="http://localhost/projet_web/Routers/AvisV.php?id=' . $vehicule['id_vcl'] . '&modele=' . urlencode($modele['nom_modele']) . '&version=' . urlencode($version['nom_version']) . '&image=' . urlencode($vehicule['image']) . '">';
-
-
                     
+                    $html .= '</div>';
+                    
+
+
+
+
+
+
+
+
+
                     if(isset($_SESSION['user_name']) && isset($_SESSION['user_id']) ){
                         
                         echo '
@@ -103,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     
                                 </form>
                                 <form id="form_etoile" class="etoile-form">
-                                <input type="submit" id="'. $id_mrq.'" value="Ajouter une étoile ★" class="etoile-submit">
+                                <input style="margin-left:40px" type="submit" id="'. $id_mrq.'" value="Ajouter une étoile ★" class="btn btn-danger etoile-submit">
                             </form>
                                 ';
                     }

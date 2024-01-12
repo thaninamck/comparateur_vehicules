@@ -24,6 +24,16 @@ class userProfileController
         $vue=new  userProfileView();
         $vue->afficherProfilePage();
     }
+    public function affichermesavis (){
+        $vue=new  userProfileView();
+        $vue->affichermesavis ();
+    }
+    public function affichereditmonavis ($idAvis){
+        $vue=new  userProfileView();
+        $avis=$this->recupererAvisParId($idAvis);
+        $vue->affichereditmonavis ($avis);
+    }
+
      
     public function getFavoriteV($idUser){
         
@@ -35,7 +45,63 @@ class userProfileController
         $result=$this->user->insererAvis($idUser, $idVehicule, $note, $contenu, $date);
         return $result;
     }
+
+    public function affichereditprofile(){
+        $vue=new  userProfileView();
+        $vue->affichereditprofile();
+    }
+
+    public function   updateUserProfile($userId, $newName, $newFirstName, $newSexe, $newBirthDate)
+    {
+        
+      $this->user->    updateUserProfile($userId, $newName, $newFirstName, $newSexe, $newBirthDate)
+        ;
+        
+    }
     
 
+    
+    public function   incrementerNoteVehicule($idVehicule)
+    {
+        
+      $this->user->    incrementerNoteVehicule($idVehicule)
+        ;
+        
+    }
+    public function   recupererAvisParUtilisateurEtVehicule($idUser)
+    {
+        
+     $res= $this->user->   recupererAvisParUtilisateurEtVehicule($idUser)
+        ;
+        return $res;
+    }
+    
+    public function    deleteAvis($id_vcl)
+    {
+        
+      $this->user-> deleteAvis($id_vcl)
+        ;
+        
+    }
 
+   
+    public function    recupererAvisParId($idAvis)
+    {
+        
+     $res= $this->user->    recupererAvisParId($idAvis)
+        ;
+        return $res;
+    }
+   
+
+
+    public function  mettreAjourCommentaire($id_avs_vcl, $nouveauCntxt)
+
+    {
+        
+      $this->user->     mettreAjourCommentaire($id_avs_vcl, $nouveauCntxt)
+
+        ;
+       
+    }
 }

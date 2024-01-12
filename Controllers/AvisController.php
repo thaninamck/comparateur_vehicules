@@ -42,10 +42,10 @@ class AvisController
    
    
    
-    public function afficherVehicule($modele, $version, $image) {
+    public function afficherVehicule($modele, $version, $image,$id_vcl) {
         $Vue = new AvisView();
         
-        $Vue->afficherVehicule($modele, $version, $image);
+        $Vue->afficherVehicule($modele, $version, $image,$id_vcl);
         
     }
 

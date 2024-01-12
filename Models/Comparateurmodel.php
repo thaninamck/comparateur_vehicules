@@ -182,6 +182,26 @@ class Comparateurmodel {
     
 
 
+    public function getCaracteristiquesVehicule($idVehicule) {
+        $pdo = $this->dbModel->connect();
+    
+        $stm = $pdo->prepare("SELECT c.*, v.id_vcl 
+                              FROM vehicule v 
+                              JOIN vehicule_caracteristiques vc ON v.id_vcl = vc.id_vcl 
+                              LEFT JOIN caracteristiques c ON vc.id_caract = c.id_caract 
+                              WHERE v.id_vcl = :id");
+    
+        $stm->bindParam(':id', $idVehicule, \PDO::PARAM_INT);
+        $stm->execute();
+    
+        $caracteristiques = $stm->fetchAll(\PDO::FETCH_ASSOC);
+    
+        $this->dbModel->disconnect($pdo);
+    
+        return $caracteristiques;
+    }
+    
+
 
 
 

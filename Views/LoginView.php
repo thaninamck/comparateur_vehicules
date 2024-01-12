@@ -46,9 +46,14 @@ if (isset($_POST['email_log']) and isset($_POST['psw_log'])) {
     }
     if ($r == 202 or $r == 201 ) {
         echo '<script type="text/javascript">
-          document.getElementById("LogResult").innerHTML= "Email ou mot de passe incorrecte"
+          document.getElementById("LogResult").innerHTML= "Email ou mot de passe incorrecte  "
           document.getElementById("LogResult").style.color = "#DC143C";
      </script>';
+    }elseif ($r == 204) {
+        echo '<script type="text/javascript">
+        document.getElementById("LogResult").innerHTML= "Nous sommes désolé mais votre compte est temporairement bloqué    "
+        document.getElementById("LogResult").style.color = "#DC143C";
+   </script>';
     }
 }
 

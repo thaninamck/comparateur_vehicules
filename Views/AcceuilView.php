@@ -15,9 +15,17 @@ class AcceuilView
         <html lang="en">
         <head>
             <meta charset="UTF-8">
-            <title>AuroPairia</title>
+            <title>AutoPairia</title>
             <link rel="stylesheet" href="../Css/Acceuil.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
             <script type="text/javascript" src="'.$path.'"></script>
         
         </head>
@@ -37,12 +45,12 @@ class AcceuilView
         <div class="top_nav">
         <div class="left">
           <div class="logo">
+          <a href="http://localhost/projet_web/Routers/Acceuil.php">
              <img src="../Assets/acceuil/logoNrml.png" alt="AutoPairia">
+             </a>
              </div>
              
-          <div class="search_bar">
-              <input type="text" placeholder="Search">
-          </div>
+          
       </div> 
       <div class="right">
         <ul>';
@@ -241,8 +249,8 @@ function afficherComparateur(){
   $accueilControler = new AccueilController();
   $types = $accueilControler->getTypesVehicules();
   echo '
-  <div class="container">
-      <h1 id="izan">Comparateur de véhicules</h1>
+  <div class="comparateur-container">
+      <h1 >Comparateur de véhicules</h1>
       
       
       <label for="vehicleType">Choisissez le type de véhicule :</label>
@@ -256,7 +264,7 @@ function afficherComparateur(){
       echo '</select>
           
       
-      <div class="form-container">
+      <div class="form-comparateur-container">
           
 
 
@@ -298,7 +306,7 @@ function afficherComparateur(){
           
 
           <div class="form-box">
-              <h2>Véhicule 1</h2>
+              <h2>Véhicule 2</h2>
               <form  method="post" class="comparison-form">
               
       
@@ -337,7 +345,7 @@ function afficherComparateur(){
           
 
           <div id="form3" class="form-box" >
-              <h2>Véhicule 1</h2>
+              <h2>Véhicule 3</h2>
               <form  method="post" class="comparison-form">
               
       
@@ -375,7 +383,7 @@ function afficherComparateur(){
 
 
           <div id="form4" class="form-box"  >
-              <h2>Véhicule 1</h2>
+              <h2>Véhicule 4</h2>
               <form  method="post" class="comparison-form">
               
       
@@ -443,6 +451,7 @@ public function afficherComparaisons() {
                     <h3>' . $comparaison['marque_1'] . ' - ' . $comparaison['modele_1'] . '</h3>
                     <p>' . $comparaison['version_1'] . '</p>
                 </div>
+                <h2>vs</h2>
                 <div class="comparison-content">
                     <h3>' . $comparaison['marque_2'] . ' - ' . $comparaison['modele_2'] . '</h3>
                     <p>' . $comparaison['version_2'] . '</p>

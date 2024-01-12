@@ -14,22 +14,28 @@ class GNewsView {
             <div class="d-flex justify-content-between mb-3">
             <h2>Tableau des News</h2>
             <div class="col-md-4">
+    <select id="sortOrder" class="form-control">
+        <option value="asc">Tri croissant</option>
+        <option value="desc">Tri décroissant</option>
+    </select>
+</div>
+            <div class="col-md-4">
             <input type="text" id="searchInput" class="form-control" placeholder="Rechercher...">
         </div>
             <a href="http://localhost/projet_web/Routers/GNews.php?idadd=1  class="btn btn-primary">Ajouter une nouvelle news</a>
         </div>
                 
             </div>
-                <table class="table">
+                <table id="news-table" class="table" style="margin:50px">
                     <thead>
                         <tr>
-                            <th>ID Image</th>
+                          
                             <th>Chemin Image</th>
-                            <th>ID News</th>
+                            
                             <th>Titre</th>
                             <th>Description</th>
                             <th>Contenu</th>
-                            <th>Date</th>
+                            <th class="date-col">Date</th>
                             <th>Actions</th> <!-- Nouvelle colonne pour les boutons Modifier/Supprimer -->
                         </tr>
                     </thead>
@@ -38,9 +44,9 @@ class GNewsView {
             foreach ($donneesNews as $news) {
                 echo '
                 <tr>
-                    <td>' . $news[0] . '</td>
+                    
                     <td>' . $news[1] . '</td>
-                    <td>' . $news[2] . '</td>
+                    
                     <td>' . $news[3] . '</td>
                     <td>' . $news[4] . '</td>
                     <td>' . $news[5] . '</td>
