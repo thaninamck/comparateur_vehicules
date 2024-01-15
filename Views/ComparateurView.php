@@ -8,6 +8,7 @@ class ComparateurView {
     
 
     function afficherResultatsComparateur($results) {
+       // var_dump($results);
         if(isset($results)){
         // Récupération des noms des caractéristiques
         $caracteristiquesNoms = [];

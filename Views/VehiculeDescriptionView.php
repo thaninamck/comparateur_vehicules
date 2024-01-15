@@ -28,7 +28,7 @@ class VehicleDescriptionView {
                 
                 echo '</div>';
                 echo '<th>';
-                echo '<a href="chemin_vers_votre_page.php?id=' . $vehicleData['id_vcl'] . '">';
+                echo '<a href="http://localhost/projet_web/Routers/VehicleDescription.php?id=' . $vehicleData['id_vcl'] . '">';
                 echo '<img id="' . $vehicleData['id_vcl'] . '" src="' . $vehicleData['image'] . '" alt="Image du véhicule" style="max-width: 400px; max-height: 450px;">';
                 echo '</a>';
                 echo '</th>';
@@ -43,7 +43,8 @@ class VehicleDescriptionView {
                 ['Marque', 'marque'],
                 ['Modèle', 'modele'],
                 ['Année', 'annee'],
-                ['Version', 'version']
+                ['Version', 'version'],
+                ['Note', 'note']
             ];
     
             foreach ($details as $detail) {
@@ -285,7 +286,9 @@ class VehicleDescriptionView {
     
     public function afficherAvis($results){
         $html=' <h2 style="margin-top: 70px; margin-bottom: 70px;text-align: center;">Meilleurs Commentaires </h2>';
-
+        if ($results) {
+            # code...
+        
         $html .= '<div class="avis-container">';
         //var_dump("le resultat de var_dump est :", $results);
         foreach($results as $avis) {
@@ -309,7 +312,9 @@ class VehicleDescriptionView {
             $html .= '</div>';
             $html .= '</div>';
         }
-        
+    }else {
+        $html .= '<p>Aucun commentaire pour l\'instant </p>';
+    }
         $html .= '</div>';
         
         echo $html;
@@ -318,13 +323,13 @@ class VehicleDescriptionView {
     
     public function afficherAjoutAvis($results){
         foreach ($results as $vehicleId => $vehicleData) {
-        echo '
         
+        if(isset($_SESSION['user_name']) && isset($_SESSION['user_id'])&&isset($_SESSION['user_status'])&&$_SESSION['user_status']!='bloque'&&$_SESSION['user_status']!='en attente') {
+            echo '
         <label for="avis" class="avis-label" style="margin-top: 20px; margin-bottom: 10px;">Ajouter un avis pour ce vehicule ! </label>
-        <form id="form_avis" class="avis-form" style=" margin-bottom: 100px;">
-            
-            <input type="text" id="'. $vehicleData['id_vcl'].'" name="avis" class="avis-input" placeholder="Votre avis...">
-            <input type="submit" value="Ajouter" class="avis-submit">';
+        <form id="form_avis" class="avis-form" style=" margin-bottom: 100px;">';
+            echo '<input type="text" id="'. $vehicleData['id_vcl'].'" name="avis" class="avis-input" placeholder="Votre avis...">
+            <input type="submit" value="Ajouter" class="avis-submit">';};
             if(isset($_SESSION['user_name']) && isset($_SESSION['user_id'])&&isset($_SESSION['user_status'])&&$_SESSION['user_status']!='bloque'&&$_SESSION['user_status']!='en attente') {
                 echo' <a href="http://localhost/projet_web/Routers/VehicleDescription.php?id_incremnt=' . $vehicleData['id_vcl'] . '" class="btn btn-danger" style="margin:5px">Ajouter une etoile ★</a>
                 ';

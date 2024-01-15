@@ -72,6 +72,7 @@ class GuideAchatModel {
                     if (!$currentVehicle) {
                         $currentVehicle = [
                             'id_vcl' => $row['id_vcl'],
+                            'note' => $row['note'],
                             'image' => $row['image'],
                             'marque' => $row['marque'],
                             'id_marque' => $row['id_marque'],
