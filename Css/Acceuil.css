@@ -178,11 +178,31 @@ img[src="logoNrml.png"] {
  
 
 .gradient_space {
-    height: 600px; /* Hauteur de l'espace coloré */
+    height: 800px; /* Hauteur de l'espace coloré */
     background: linear-gradient(to right, #c21313, #000000); /* Dégradé de couleur */
     position: relative;
   }
   
+  .rightnews {
+    width: 50%; /* La moitié de l'espace pour le texte */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.desc , .description {
+  width: fit-content; /* Largeur de l'image */
+  height: fit-content; /* Hauteur de l'image */
+}
+
+.read-more {
+    padding: 10px;
+    text-decoration: none;
+    color: #aaa6a6; /* Couleur du texte du lien */
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
 
   .left_image,
   .right_image {
@@ -207,7 +227,7 @@ img[src="logoNrml.png"] {
     border-top-right-radius: 30%;
     border-bottom-right-radius:30% ;
     width: 800px; /* Largeur de l'image */
-    height: 300px; /* Hauteur de l'image */
+    height: 400px; /* Hauteur de l'image */
    padding-right: 5px;
     display: flex;
     justify-content: space-between;
@@ -278,7 +298,7 @@ img[src="logoNrml.png"] {
 
   .left_image .vehicle-image {
     width: 250px; 
-    height: 250px;
+    height: 300px;
     border-radius: 10px;
      display: block;
      position: absolute;
@@ -1039,8 +1059,8 @@ p {
 
 /* Style pour le logo de la marque */
 .brand-logo img {
-  max-width: 100px; /* Ajustez la taille de l'image selon vos besoins */
-  height: auto;
+  max-width: 300px; /* Ajustez la taille de l'image selon vos besoins */
+  height: 300px;
   margin-right: 20px; /* Marge entre l'image et les informations */
   border-radius: 5px; /* Coins arrondis */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Ombre légère */
@@ -1074,7 +1094,22 @@ p {
 
 /*********************************************/
 /**************** pour la listes des vehicules dune marque */
+.scrollable-container {
+  width: 85%;
+  height: 700px;
+  overflow-y: auto; /* Ajoute une barre de défilement verticale si nécessaire */
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 20px auto;
+}
 
+/* Vos styles existants pour les véhicules */
+.vehicle {
+  width: 200px;
+  height: 100px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+}
 
 .card {
   border: 1px solid #ccc;
@@ -1298,3 +1333,5 @@ p {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
+
+

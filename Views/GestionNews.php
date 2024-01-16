@@ -10,69 +10,57 @@ class GNewsView {
             echo '
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-            <div class="container">
+            <div class="container" >
             <div class="d-flex justify-content-between mb-3">
             <h2>Tableau des News</h2>
-            <div class="col-md-4">
-    <select id="sortOrder" class="form-control">
-        <option value="asc">Tri croissant</option>
-        <option value="desc">Tri décroissant</option>
-    </select>
-</div>
+           
             <div class="col-md-4">
             <input type="text" id="searchInput" class="form-control" placeholder="Rechercher...">
-        </div>
-            <a href="http://localhost/projet_web/Routers/GNews.php?idadd=1  class="btn btn-primary">Ajouter une nouvelle news</a>
+        </div style="margin:20px">
+            <a style="margin:20px" href="http://localhost/projet_web/Routers/GNews.php?idadd=1  class="btn btn-primary">Ajouter une nouvelle news</a>
         </div>
                 
             </div>
-                <table id="news-table" class="table" style="margin:50px">
-                    <thead>
-                        <tr>
-                          
-                            <th>Chemin Image</th>
-                            
-                            <th>Titre</th>
-                            <th>Description</th>
-                            <th>Contenu</th>
-                            <th class="date-col">Date</th>
-                            <th>Actions</th> <!-- Nouvelle colonne pour les boutons Modifier/Supprimer -->
-                        </tr>
-                    </thead>
-                    <tbody>';
-        
-            foreach ($donneesNews as $news) {
-                echo '
+            <table id="myTable" class="display table" style="margin:20px;">
+            <thead>
                 <tr>
-                    
-                    <td>' . $news[1] . '</td>
-                    
-                    <td>' . $news[3] . '</td>
-                    <td>' . $news[4] . '</td>
-                    <td>' . $news[5] . '</td>
-                    <td>' . $news[6] . '</td>
-                    <td>
-                    <!-- Bouton Modifier (ou lien pour ouvrir la fenêtre modale) -->
-                    <a href="http://localhost/projet_web/Routers/GNews.php?id='. $news[2] .'" >Modifier</a>
-                        
-                        <!-- Bouton Supprimer (ou lien pour supprimer) -->
-                        <a href="http://localhost/projet_web/Routers/GNews.php?id=' . $news[2] . '" data-news-id="' . $news[2] . '" class="btn btn-danger delete-news">Supprimer</a>
-                    </td>
-                </tr>';
-            }
-            
-            echo '
-                    </tbody>
-                </table>
+                    <th>Chemin Image</th>
+                    <th class="th-sm">Titre</th>
+                    <th class="th-sm">Description</th>
+                    <th class="th-sm">Contenu</th>
+                    <th class="th-sm">Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>';
+    
+    foreach ($donneesNews as $news) {
+        echo '
+            <tr>
+                <td>' . $news[1] . '</td>
+                <td>' . $news[3] . '</td>
+                <td>' . $news[4] . '</td>
+                <td>' . $news[5] . '</td>
+                <td>' . $news[6] . '</td>
+                <td>
+                    <a href="http://localhost/projet_web/Routers/GNews.php?id=' . $news[2] . '" >Modifier</a>
+                    <a href="http://localhost/projet_web/Routers/GNews.php?id=' . $news[2] . '" data-news-id="' . $news[2] . '" class="btn btn-danger delete-news">Supprimer</a>
+                </td>
+            </tr>';
+    }
+    
+    echo '
+            </tbody>
+        </table>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>';
+            ';
         }
         
     
      
         public function showEditNew($new){
            // var_dump("la new est ",$new);
-            echo '<form id="newsForm" class="mt-4 mb-4">';
+            echo '<form id="newsForm" class="mt-4 mb-4" style="margin:80px">';
             foreach ($new as $newData) {
                 echo '
                 <div class="mb-3">
@@ -112,7 +100,7 @@ class GNewsView {
         
         public function InsererNew(){
             // var_dump("la new est ",$new);
-             echo '<form id="addnewsForm" class="mt-4 mb-4">';
+             echo '<form id="addnewsForm" class="mt-4 mb-4" style="margin:80px">';
              
                  echo '
                  <div class="mb-3">

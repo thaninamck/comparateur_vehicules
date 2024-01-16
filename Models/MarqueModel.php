@@ -74,7 +74,7 @@ class Marque {
     
 
     public function updateMarque($id, $logo, $nom, $pays, $siege_soc, $annee, $web) {
-        try {
+       
             $pdo = $this->dbModel->connect();
             
             $query = "UPDATE marque 
@@ -95,11 +95,7 @@ class Marque {
             
             $this->dbModel->disconnect($pdo);
             
-            return true; // Succès de la mise à jour
-        } catch (\PDOException $e) {
-            // Gérer les erreurs éventuelles ici
-            return false; // Échec de la mise à jour
-        }
+            
     }
     
     public function getVehiculeDetailsById($id_vcl) {

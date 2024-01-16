@@ -35,7 +35,7 @@ $accueilController->afficherTemmplate('../Js/marques.js');
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_mrq']) && isset($_POST['avis'])&& isset($u_id)){
             $id_mrq = !empty($_POST['id_mrq']) ? $_POST['id_mrq'] : '';
             $avis = !empty($_POST['avis']) ? $_POST['avis'] : '';
-             var_dump("lavis est ",$avis);
+             //var_dump("l'\avis est ",$avis);
             $MarquesController-> insererAvisMarque($u_id, $id_mrq, $avis);
             $html='success';
             echo $html;

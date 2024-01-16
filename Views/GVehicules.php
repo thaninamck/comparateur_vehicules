@@ -147,7 +147,7 @@ class VehiculesView {
     public function showEditMarque($marqueData) {
         echo '
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <form id="marqueForm" class="mt-4 mb-4">';
+        <form style="margin:80px;" id="marqueForm" class="mt-4 mb-4">';
         
         foreach ($marqueData as $data) {
             echo '
@@ -334,7 +334,7 @@ class VehiculesView {
             </head>
             <body>
                 <div class="container mt-5">
-                    <form method="post" class="custom-form">
+                    <form  style="margin:80px" method="post" class="custom-form">
                         <div class="mb-3">
                             <label for="logo" class="form-label">Logo :</label>
                             <input type="text" class="form-control" id="logo" name="logo" placeholder="URL du logo">

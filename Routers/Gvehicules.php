@@ -1,6 +1,6 @@
 <?php
 require_once ('../Controllers/AdminController.php');
-
+$controller =new AdminController();
 if(isset($_SESSION['id_admin'])  ){//si l'utilisateur est authentifié
     $controller =new AdminController();
     $controller->afficherTemplate("../Js/gvehicules.js");
@@ -17,6 +17,22 @@ if (isset($_GET['idaddvehicule'])) {
     $id=$_GET['idaddvehicule'];
     //var_dump("id est ",$id);
     $controller->insertVcl($id);
+
+
+}
+elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_mrq1'])) {
+    // Récupération de l'ID de la marque envoyé depuis la requête AJAX
+    $id_mrq = $_POST['id_mrq1'];
+    $logo = $_POST['logo'];
+    $nom = $_POST['nom'];
+    $pays = $_POST['pays'];
+    $siege_soc = $_POST['siege_socc'];
+    $annee = $_POST['annee'];
+    $web = $_POST['web'];
+   
+    $controller->updateMarque($id_mrq, $logo, $nom, $pays, $siege_soc, $annee, $web);
+    
+    echo 'success';
 
 
 }
@@ -157,32 +173,16 @@ elseif  (isset($_GET['id_vcl'])) {
     $web = $_POST['web'];
    
 
-    $controller->   insererNouvelleMarque($logo, $nom, $pays, $siege_soc, $annee, $web)
+    $controller->  insererNouvelleMarque($logo, $nom, $pays, $siege_soc, $annee, $web)
         ;
     
     echo 'success';
 }
 
 
-elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_mrq'])) {
-    // Récupération de l'ID de la marque envoyé depuis la requête AJAX
-    $id_mrq = $_POST['id_mrq'];
-    $logo = $_POST['logo'];
-    $nom = $_POST['nom'];
-    $pays = $_POST['pays'];
-    $siege_soc = $_POST['siege_soc'];
-    $annee = $_POST['annee'];
-    $web = $_POST['web'];
-   
-
-    $controller->updateMarque($id_mrq, $logo, $nom, $pays, $siege_soc, $annee, $web);
-    
-    echo 'success';
-
-
-}elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_vcl'])&&isset($_POST['newImageValue'])) {
+elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_vcl'])&&isset($_POST['newImageValue'])) {
     $newImageValue=$_POST['newImageValue'];
-    var_dump($newImageValue);
+    //var_dump($newImageValue);
 
     $id_vcl=$_POST['id_vcl'];
     $controller-> updateVehiculeDetailsById($id_vcl, $newImageValue);

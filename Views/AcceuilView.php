@@ -17,14 +17,19 @@ class AcceuilView
             <meta charset="UTF-8">
             <title>AutoPairia</title>
             <link rel="stylesheet" href="../Css/Acceuil.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            <!-- jQuery -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <script src="js/jquery.min.js" type="text/javascript"></script>
+            
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            
+            <!-- DataTables -->
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.11.6/css/dataTables.bootstrap5.min.css">
+            <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.11.6/js/dataTables.bootstrap5.min.js"></script>
 
             <script type="text/javascript" src="'.$path.'"></script>
         

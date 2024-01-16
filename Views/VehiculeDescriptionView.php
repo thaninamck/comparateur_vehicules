@@ -313,7 +313,7 @@ class VehicleDescriptionView {
             $html .= '</div>';
         }
     }else {
-        $html .= '<p>Aucun commentaire pour l\'instant </p>';
+        $html .= '<div style="text-align: center;"><p>Aucun commentaire pour l\'instant </p></div>';
     }
         $html .= '</div>';
         

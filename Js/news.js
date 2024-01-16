@@ -1,4 +1,18 @@
 $(document).ready(function() {
+    //$('#myTable').DataTable();
+
+    //pour la recherche 
+
+    $('#searchInput').on('keyup', function() {
+        console.log("je suis dans la recherche ")
+        const value = $(this).val().toLowerCase();
+        $('table tbody tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+   
+       
     
 
     $('.btn-primary').on('click', function(event) {
@@ -106,20 +120,12 @@ $(document).ready(function() {
 
 
 
-    //pour la recherche 
-
-    $('#searchInput').on('keyup', function() {
-        console.log("je suis dans la recherche ")
-        const value = $(this).val().toLowerCase();
-        $('table tbody tr').filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
+    
 
 
-
-
-
+   
+       
+  
 
 
 

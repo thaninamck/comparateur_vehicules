@@ -51,12 +51,13 @@ if(isset($_SESSION['user_name']) && isset($_SESSION['user_id']) ){//si l'utilisa
 
 $accueilController =new AccueilController();
 $accueilController->afficherTemmplate('../Js/comparateur.js');
-$accueilController->afficherComparateur();
+
 
     if (isset($results)) {
         $controller->afficherComparateurPage($results);
     }
    
+    $accueilController->afficherComparateur();
     $accueilController->afficherpieddepage();
 
     

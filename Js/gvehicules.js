@@ -2,7 +2,7 @@ $(document).ready(function() {
     
 
    //pour la modification de la marque 
-   $('.update-mrq').on('click', function(e) {
+   $(document).on('click', '.update-mrq', function(e) {
     e.preventDefault();
 
     const id_mrq = $(this).data('mrqid');
@@ -23,13 +23,13 @@ $(document).ready(function() {
     if (confirm("Êtes-vous sûr de vouloir modifier cette marque ?")) {
         $.ajax({
             type: "POST",
-            url: "",
+            url: "../Routers/Gvehicules.php",
             data: {
-                id_mrq: id_mrq,
+                id_mrq1: id_mrq,
                 logo: logo,
                 nom: nom,
                 pays: pays,
-                siege_soc: siege_soc,
+                siege_socc: siege_soc,
                 annee: annee,
                 web: web,
                 
