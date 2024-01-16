@@ -9,7 +9,7 @@ class GusersView {
         echo '
 
        
-        <div class="col-md-4">
+        <div  style ="margin:80px"class="col-md-4">
 
         <input type="text" id="searchInput" class="form-control mt-3" placeholder="Rechercher...">
 

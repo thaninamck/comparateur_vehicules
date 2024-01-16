@@ -183,7 +183,7 @@ echo "
         
             
            
-                <form id=\"editFormuser\">
+                <form style=\"margin:80px\" id=\"editFormuser\">
                     <div class=\"mb-3\">
                         <label for=\"editName\" class=\"form-label\">Nom</label>
                         <input type=\"text\" class=\"form-control\" id=\"editName\" value=\"{$_SESSION['user_name']}\">
@@ -221,34 +221,43 @@ echo "
     public function afficherUserInfo($id, $nom, $prenom, $email, $photo, $sexe) {
         $controller = new userProfileController();
         $favorites = $controller->getFavoriteV($id);
+    
         echo '
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="user-info text-center">
-                        <img src="' . $photo . '" alt="Photo de profil" class="img-fluid rounded-circle mt-3" style="max-width: 200px;">
-                        <h2 class="mt-3">' . $nom . ' ' . $prenom . '</h2>
-                        
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="profile-info text-center">
+                        <img src="' . $photo . '" alt="Photo de profil" class="img-fluid">
                     </div>
-                    <p class="mb-2">Email: ' . $email . '</p>
-                        <p class="mb-4">Sexe: ' . $sexe . '</p>
-                    <h3 class="text-center mb-3">Liste des véhicules favoris</h3>
-                    <div class="favorites-container">';
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Nom: ' . $nom . '</h4>
+                            <h4>Prénom: ' . $prenom . '</h4>
+                            <h4>Sexe: ' . $sexe . '</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <h4 style="margin-top:40px"class="mt-4">Liste des véhicules favoris</h4>
+            <div class="favorites-container mx-auto">';
     
         foreach ($favorites as $favorite) {
             echo '
             <div class="vehicle-container mb-3">
-                <img src="' . $favorite['image'] . '" alt="Image du véhicule" class="img-fluid">
+                <img style="height:200px;width:150px" src="' . $favorite['image'] . '" alt="Image du véhicule" class="img-fluid">
                 <p class="mb-1">' . $favorite['marque'] . ' - ' . $favorite['modele'] . ' - ' . $favorite['version'] . '</p>
                 <p class="mb-0">Note: ' . $favorite['note'] . ' ★</p>
             </div>';
         }
     
         echo '</div>
-                </div>
-            </div>
         </div>';
     }
+    
+    
     
     
     

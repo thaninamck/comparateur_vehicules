@@ -43,6 +43,6 @@ elseif ($_SERVER["REQUEST_METHOD"] == "POST"&&isset($_POST['img']) ) {
 }else {
     $controller->afficherguide();
     $controller->affichercontacte();
-    $controller->afficherNews();
+    
 }
 ?>
